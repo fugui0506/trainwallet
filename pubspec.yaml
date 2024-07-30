@@ -1,0 +1,108 @@
+name: cgwallet
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # 国际化
+  flutter_localizations:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.6
+
+  # GetX 框架
+  get: ^4.6.6 
+
+  # 本地储存
+  shared_preferences: ^2.2.3 
+
+  # 网络请求
+  dio: ^5.4.3+1
+
+  # ws 模块
+  web_socket_channel: ^3.0.0
+
+  # 加密
+  encrypt: ^5.0.3
+
+  # 包信息
+  package_info_plus: ^8.0.0
+
+  # 设备信息
+  device_info_plus: ^10.1.0
+
+  # 动态获取权限
+  permission_handler: ^11.3.1
+
+  # svg
+  flutter_svg: ^2.0.10+1
+
+  # lottie
+  lottie: ^3.1.2
+
+  # webview
+  webview_flutter: ^4.8.0
+
+  # 音频/音效
+  audioplayers: ^6.0.0
+
+  # 行为式验证码
+  captcha_plugin_flutter:
+    path: ./plugins/captcha_plugin_flutter
+  
+  # 扫码
+  mobile_scanner: ^5.1.1
+
+  # 相册图片选择
+  image_picker: ^1.1.2
+
+  # 获取外部路径
+  path_provider: ^2.1.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+    
+  flutter_lints: ^3.0.0
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+    - assets/images/dark/
+    - assets/images/light/
+
+    - assets/svg/
+    - assets/svg/dark/
+    - assets/svg/light/
+
+    - assets/lottie/
+    - assets/lottie/dark/
+    - assets/lottie/light/
+
+    - assets/audios/
+
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
