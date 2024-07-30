@@ -54,7 +54,7 @@ class IndexView extends GetView<IndexController> {
                 onModel: (json) => UserInfoModel.fromJson(json),
                 data: {
                   "username": "fugui006",
-                  "password": 'Fugui006'.encrypt(MyConfig.app.aesKey),
+                  "password": 'Fugui006'.encrypt(MyConfig.key.aesKey),
                   "captcha": "12222",
                   "captchaId": "898",
                 }

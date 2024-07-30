@@ -171,7 +171,7 @@ class DioService extends GetxService {
 
       if (response.statusCode == 200) {
         // 链接有效
-        final data = response.data.toString().decrypt(MyConfig.app.aesKey);
+        final data = response.data.toString().decrypt(MyConfig.key.aesKey);
         final json = jsonDecode(data);
 
         MyLogger.w('配置信息获取成功：${response.data}');

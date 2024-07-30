@@ -129,7 +129,7 @@ class DeviceService extends GetxService with WidgetsBindingObserver {
 
   // 获取安卓设备号
   Future<String> getAndroidId() async {
-    final platform = MethodChannel(MyConfig.app.channelDeviceInfo);
+    final platform = MethodChannel(MyConfig.channel.deviceInfo);
     String androidId;
     try {
       final String result = await platform.invokeMethod('getAndroidId');
@@ -229,7 +229,7 @@ class DeviceService extends GetxService with WidgetsBindingObserver {
   /// 将图片保存至相册
   Future<bool> saveImageToGallery(File imageFile) async {
     try {
-      final channel = MethodChannel(MyConfig.app.channelImage);
+      final channel = MethodChannel(MyConfig.channel.image);
       // Save image to gallery using platform channel
       final result = await channel.invokeMethod('saveImageToGallery', {
         'path': imageFile.path,
@@ -282,17 +282,17 @@ class DeviceService extends GetxService with WidgetsBindingObserver {
   // }
 
   // 识别图片中的二维码
-  Future<bool> decodeQRCode(String filePath) async {
-    try {
-      final platform = MethodChannel(MyConfig.app.channelImage);
-      final String result = await platform.invokeMethod('decodeQRCode', {"path": filePath});
-      MyLogger.w('二维码识别结果: $result');
-      return true;
-    } catch (e) {
-      MyLogger.w('未识别到二维码: $e');
-      return false;
-    }
-  }
+  // Future<bool> decodeQRCode(String filePath) async {
+  //   try {
+  //     final platform = MethodChannel(MyConfig.channel.channelImage);
+  //     final String result = await platform.invokeMethod('decodeQRCode', {"path": filePath});
+  //     MyLogger.w('二维码识别结果: $result');
+  //     return true;
+  //   } catch (e) {
+  //     MyLogger.w('未识别到二维码: $e');
+  //     return false;
+  //   }
+  // }
 
   /// 设置安卓状态栏
   Future<void> _setAndroid() async {

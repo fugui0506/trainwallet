@@ -78,7 +78,7 @@ class LoginController extends GetxController {
         paddingBottom:15
     );
     captchaPlugin.init({
-      "captcha_id": MyConfig.app.captchaKey,
+      "captcha_id": MyConfig.key.captchaKey,
       "is_debug": false,
       "dimAmount": 0.8,
       "is_touch_outside_disappear": true,
