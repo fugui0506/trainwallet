@@ -56,6 +56,16 @@ class MyButton extends StatelessWidget {
     child: FittedBox(child: Text(text)),
   );
 
+  // 填充颜色的长按钮
+  factory MyButton.loading(BuildContext context) => MyButton(
+    myButtonStyle: MyButtonStyle.filledButtonLong,
+    onPressed: null,
+    child: SizedBox(width: 16, height: 16, child: CircularProgressIndicator(
+      color: Theme.of(context).myColors.primary,
+      strokeWidth: 2,
+    )),
+  );
+
   // 填充颜色的短按钮
   factory MyButton.filedShort({
     required void Function()? onPressed, 

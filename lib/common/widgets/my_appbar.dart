@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cgwallet/common/common.dart';
+import 'package:get/get.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
@@ -42,7 +43,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     title: Text(title),
     titleTextStyle: Theme.of(context).myStyles.appBarTitle,
     iconTheme: Theme.of(context).myStyles.appBarIconThemeData,
-    centerTitle: true,
     flexibleSpace: Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -94,6 +94,16 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget? leadingButton;
+    if (Navigator.canPop(context)) {
+      leadingButton = IconButton(onPressed: () => Get.back(), 
+        icon: Container(color: Theme.of(context).myColors.primary.withOpacity(0), 
+          width: double.infinity, 
+          height: double.infinity, 
+          child: const Center(child: Icon(Icons.arrow_back_ios),
+        )),
+      );
+    }
     return AppBar(
       titleTextStyle: titleTextStyle,
       automaticallyImplyLeading: automaticallyImplyLeading,
@@ -104,7 +114,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: centerTitle,
       titleSpacing: titleSpacing,
       flexibleSpace: flexibleSpace,
-      leading: leading,
+      leading: leading ?? leadingButton,
       title: title,
       actions: actions,
     );

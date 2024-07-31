@@ -23,8 +23,13 @@ class MyStyles {
   // appBar的图标样式
   IconThemeData get appBarIconThemeData => IconThemeData(color: myColors.onaAppBar, size: 18);
 
+  // appBar的文字样式
+  TextStyle get dialogTitle => TextStyle(color: myColors.onDialogBackground, fontSize: 18);
+  // appBar的图标样式
+  IconThemeData get dialogMessage => IconThemeData(color: myColors.onDialogBackground, size: 14);
+
   // snackBar 文字样式
-  TextStyle get onSnackbar => TextStyle(color: myColors.onBackground, fontSize: 14);
+  TextStyle get onSnackbar => TextStyle(color: myColors.background, fontSize: 14);
 
   // 按钮文字的样式
   TextStyle get buttonText => const TextStyle(fontSize: 14);

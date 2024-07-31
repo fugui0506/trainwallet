@@ -1,7 +1,5 @@
 import 'package:cgwallet/common/common.dart';
-import 'package:cgwallet/common/widgets/my_alert.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CaptchaModel {
   CaptchaModel({
@@ -18,14 +16,12 @@ class CaptchaModel {
 
   static Future<CaptchaModel> get(BuildContext context) async {
     var data = CaptchaModel.empty();
-    MyAlert.loading(context);
     await DioService.to.get<CaptchaModel>(ApiPath.base.captcha,
       onSuccess: (code, msg, results) {
         data = results;
       },
       onModel: (m) => CaptchaModel.fromJson(m),
     );
-    Get.back();
     return data;
   }
 

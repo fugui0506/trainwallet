@@ -9,7 +9,9 @@ abstract class Lang {
   static const inputPasswordHintText = 'input_password_hint_text';
   static const inputCaptchaHintText = 'input_captcha_hint_text';
   static const inputCaptchaSendText = 'input_captcha_send_text';
-
+  static const inputPhoneHintText = 'input_phone_hint_text';
+  static const inputPhoneCodeHintText = 'input_phone_code_hint_text';
+  static const inputSendSmsButtonText = 'input_send_sms_button_text';
 
 
   // 未知页面

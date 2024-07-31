@@ -121,7 +121,20 @@ class IndexView extends GetView<IndexController> {
             const SizedBox(width: 10),
             Expanded(child: MyButton.filedShort(onPressed: () {}, text: 'Loading弹窗')),
             const SizedBox(width: 10),
-            Expanded(child: MyButton.filedShort(onPressed: () => MyAlert.dialog('message'), text: 'Alert弹窗')),
+            Expanded(child: MyButton.filedShort(onPressed: () => MyAlert.dialog(
+              title: '测试全部都有',
+              message: '没事，我从全部收款方式那里去拿一下，把没有的去掉就行，我只是不想他们提这个需求，他们还说是 bug，我就受不了',
+              confirmText: '我忍',
+              // cancelText: '我拒绝',
+              onConfirm: () {
+
+              },
+              onCancel: () {
+
+              },
+              showCancelButton: true,
+              showConfirmButton: true,
+            ), text: 'Alert弹窗')),
           ]),
 
           Row(children: [

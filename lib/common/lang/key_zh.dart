@@ -9,6 +9,9 @@ const Map<String, String> zh = {
   Lang.inputPasswordHintText: '请输入密码',
   Lang.inputCaptchaHintText: '请输入验证码',
   Lang.inputCaptchaSendText: '点击获取验证码',
+  Lang.inputPhoneHintText: '请输入手机号码',
+  Lang.inputPhoneCodeHintText: '请输入短信验证码',
+  Lang.inputSendSmsButtonText: '发送验证码',
 
   // 未知页面
   Lang.unknownViewTltle: '未知页面',

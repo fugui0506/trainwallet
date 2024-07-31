@@ -13,6 +13,10 @@ class UserService extends GetxService {
   // 用户信息
   final userInfo = UserInfoModel.empty().obs;
 
+  // lastIp
+  String lastIp = '';
+  String lastLoginTime = '';
+
   @override
   void onInit() {
     super.onInit();

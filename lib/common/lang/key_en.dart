@@ -9,7 +9,9 @@ const Map<String, String> en = {
   Lang.inputPasswordHintText: 'Please enter your password',
   Lang.inputCaptchaHintText: 'Please enter captcha',
   Lang.inputCaptchaSendText: 'Click get the captcha',
-
+  Lang.inputPhoneHintText: 'Please enter your phone number',
+  Lang.inputPhoneCodeHintText: 'Please enter code',
+  Lang.inputSendSmsButtonText: 'Send SMS',
 
   // 未知页面
   Lang.unknownViewTltle: 'Unknown Page',

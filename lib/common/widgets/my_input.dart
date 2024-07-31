@@ -1,8 +1,11 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:cgwallet/common/common.dart';
+import 'package:cgwallet/common/widgets/my_alert.dart';
 import 'package:cgwallet/common/widgets/my_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class MyInput extends StatelessWidget {
@@ -27,6 +30,7 @@ class MyInput extends StatelessWidget {
     this.onChanged,
     this.errorText,
     this.maxLength,
+    this.inputFormatters,
   });
 
   final TextEditingController? controller;
@@ -48,6 +52,7 @@ class MyInput extends StatelessWidget {
   final void Function(String)? onChanged;
   final String? errorText;
   final int? maxLength;
+  final List<TextInputFormatter>? inputFormatters;
 
   /// 账号输入框
   factory MyInput.account(BuildContext context, TextEditingController controller, FocusNode focusNode) {
@@ -138,7 +143,7 @@ class MyInput extends StatelessWidget {
 
   /// 图片验证码
   /// 点击验证码可以重新请求
-  factory MyInput.pictureCode(
+  factory MyInput.captcha(
     BuildContext context, 
     TextEditingController controller, 
     FocusNode focusNode, 
@@ -195,11 +200,120 @@ class MyInput extends StatelessWidget {
 
   /// 手机号码
   /// 有手机验证码发送按钮
-  factory MyInput.phone(TextEditingController controller, FocusNode focusNode) => MyInput(controller: controller, focusNode: focusNode);
+  /// 账号输入框
+  factory MyInput.phone(BuildContext context, TextEditingController controller, FocusNode focusNode) {
+    final showSuffixIcon = false.obs;
+
+    final suffixIcon = Obx(() => showSuffixIcon.value
+      ? MyButton.icon(
+          onPressed: () {
+            controller.text = '';
+            showSuffixIcon.value = false;
+            // if (!focusNode.hasFocus) focusNode.requestFocus();
+          }, 
+          icon: Theme.of(context).myIcons.inputClear,
+        )
+      : const SizedBox());
+
+    void onChanged(String text) {
+      if (text.isEmpty) {
+        showSuffixIcon.value = false;
+      } else {
+        showSuffixIcon.value = true;
+      }
+    }
+
+    final prefixIcon = SizedBox(width: 40, height: 40, child: Center(
+      child:SizedBox(width: 20, height: 20, child: Theme.of(context).myIcons.inputPhone)
+    ));
+
+    return MyInput(
+      controller: controller, 
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9+]'))],
+      focusNode: focusNode,
+      keyboardType: TextInputType.number,
+      prefixIcon: prefixIcon,
+      suffixIcon: suffixIcon,
+      hintText: Lang.inputPhoneHintText.tr,
+      onChanged: onChanged,
+    );
+  }
 
   /// 手机验证码
-  static Widget phoneCode(BuildContext context, TextEditingController controller, FocusNode focusNode) {
-    return MyInput(controller: controller, focusNode: focusNode);
+  /// 集成发送验证码功能
+  factory MyInput.phoneCode(
+    BuildContext context, 
+    TextEditingController controller,
+    FocusNode focusNode,
+    TextEditingController phoneEditingController,
+  ) {
+    final loading = false.obs;
+    final codeTimer = 0.obs;
+    Timer? timer;
+
+    void stopTimer() {
+      timer?.cancel();
+      timer = null;
+      codeTimer.value = 0;
+    }
+
+    void startTimer() {
+      stopTimer();
+      const oneSec = Duration(seconds: 1);
+      codeTimer.value = 60;
+      timer = Timer.periodic(
+        oneSec,
+        (Timer timer) {
+          codeTimer.value--;
+          if (codeTimer <= 0) {
+            stopTimer();
+            loading.value = false;
+            codeTimer.value = 0;
+          }
+        },
+      );
+    }
+
+    Future<void> sendSms() async {
+      await DioService.to.post(ApiPath.base.sendSms,
+        onSuccess: (code, msg, results) {
+          startTimer();
+          MyAlert.snackbar('短信已成功发送');
+        },
+        data: {
+          'phone': phoneEditingController.text,
+        },
+        onError: () async {
+          loading.value = false;
+        },
+      );
+    }
+
+    void onLoading() async {
+      loading.value = true;
+      await sendSms();
+    }
+
+    final prefixIcon = SizedBox(width: 40, height: 40, child: Center(
+      child:SizedBox(width: 20, height: 20, child: Theme.of(context).myIcons.inputCode)
+    ));
+
+    final suffixIcon = SizedBox(height: 40, child: Padding(padding: const EdgeInsets.all(4),
+      child: Obx(() => MyButton.filedShort(
+      textColor: loading.value ? Theme.of(context).myColors.onButtonDisable : Theme.of(context).myColors.onSecondary,
+      backgroundColor: loading.value ? Theme.of(context).myColors.buttonDisable : Theme.of(context).myColors.secondary,
+      onPressed: loading.value ? null : onLoading, 
+      text: loading.value && codeTimer.value > 0 ? '${codeTimer.value}' : Lang.inputSendSmsButtonText.tr,
+    ))));
+
+    return MyInput(
+      controller: controller, 
+      focusNode: focusNode,
+      keyboardType: TextInputType.number,
+      prefixIcon: prefixIcon,
+      suffixIcon: suffixIcon,
+      hintText: Lang.inputPhoneCodeHintText.tr,
+    );
   }
 
   /// 金额输入框
@@ -222,6 +336,7 @@ class MyInput extends StatelessWidget {
       onChanged: onChanged,
       maxLines: maxLines,
       keyboardType: keyboardType,
+      inputFormatters: inputFormatters,
       decoration: InputDecoration(
         fillColor: color,
         prefixIcon: prefixIcon,

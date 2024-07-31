@@ -45,6 +45,7 @@ class DioService extends GetxService {
       },
       onError: (DioException err, handler) {
         MyLogger.dioErr('DioService Error', '', err);
+        // MyAlert.snackbar('${err.message}');
         return handler.next(err);
       },
     );
@@ -65,7 +66,7 @@ class DioService extends GetxService {
     CancelToken? cancelToken,
     void Function(int, int)? onReceiveProgress,
     T Function(Map<String, dynamic>)? onModel,
-    Function(DioException?)? onError,
+    void Function()? onError,
   }) async {
     try {
       final response = await dio.get(path,
@@ -81,12 +82,13 @@ class DioService extends GetxService {
         final model = onModel != null ? onModel(responseModel.data) : responseModel.data as T;
         onSuccess?.call(responseModel.code, responseModel.msg, model);
       } else {
-        onError?.call(null);
+        MyAlert.snackbar(responseModel.msg);
+        onError?.call();
       }
     } on DioException catch (e) {
       MyLogger.dioErr('get', path, e);
       MyAlert.snackbar('$e');
-      onError?.call(e);
+      onError?.call();
     }
   }
 
@@ -96,7 +98,7 @@ class DioService extends GetxService {
     Map<String, dynamic>? data,
     CancelToken? cancelToken,
     T Function(Map<String, dynamic>)? onModel,
-    Function(DioException?)? onError,
+    void Function()? onError,
   }) async {
     try {
       final response = await dio.post(path,
@@ -111,11 +113,13 @@ class DioService extends GetxService {
         final model = onModel != null ? onModel(responseModel.data) : responseModel.data as T;
         onSuccess?.call(responseModel.code, responseModel.msg, model);
       } else {
-        onError?.call(null);
+        onError?.call();
+        MyAlert.snackbar(responseModel.msg);
       }
     } on DioException catch (e) {
+      onError?.call();
       MyLogger.dioErr('post', path, e);
-      onError?.call(e);
+      MyAlert.snackbar('$e');
     }
   }
 

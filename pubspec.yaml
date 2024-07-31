@@ -67,6 +67,9 @@ dependencies:
   # 获取外部路径
   path_provider: ^2.1.3
 
+  # 键盘隐藏
+  flutter_keyboard_visibility: ^6.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -10,12 +10,13 @@ class MyAlert {
       messageText: Text(message, style: Get.theme.myStyles.onSnackbar),
       snackPosition: SnackPosition.TOP,
       borderRadius: 8,
-      margin: const EdgeInsets.all(16),
+      margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
       animationDuration: const Duration(milliseconds: 500),
       duration: const Duration(milliseconds: 2000),
-      boxShadows: [BoxShadow(color: Get.theme.myColors.primary, blurRadius: 13,)],
-      backgroundColor: Get.theme.myColors.background.withOpacity(0.9)
+      // borderColor: Get.theme.myColors.primary.withOpacity(0.6),
+      // boxShadows: [BoxShadow(color: Get.theme.myColors.primary.withOpacity(0.6), blurRadius: 4, spreadRadius: 0)],
+      backgroundColor: Get.theme.myColors.onBackground.withOpacity(0.72)
     );
   }
 
@@ -29,8 +30,23 @@ class MyAlert {
     Get.dialog(child, barrierDismissible: false);
   }
 
-  static void dialog(String message) {
+  static void block() {
+    final child = Container();
+    Get.dialog(child, barrierDismissible: false, useSafeArea: false, barrierColor: Colors.transparent);
+  }
+
+  static void dialog({
+    String? title,
+    String? message,
+    String? confirmText,
+    String? cancelText,
+    void Function()? onConfirm,
+    void Function()? onCancel,
+    bool showCancelButton = true,
+    bool showConfirmButton = true,
+  }) {
     if (Get.isDialogOpen != null && Get.isDialogOpen!) return;
+    
     Get.generalDialog(
       barrierDismissible: true,
       barrierLabel: '',
@@ -46,16 +62,44 @@ class MyAlert {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text('Custom Dialog Title', style: TextStyle(fontSize: 20)),
-                const SizedBox(height: 20),
-                const Text('This is a custom dialog content.'),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    Get.back(); // 关闭对话框
-                  },
-                  child: const Text('Close'),
-                ),
+                if (title != null)
+                  Text(title, style: Theme.of(context).myStyles.appBarTitle),
+                if (title != null)
+                  const SizedBox(height: 20),
+                if (message != null)
+                  Text(message, style: Theme.of(context).myStyles.labelText,),
+                if (showCancelButton || showConfirmButton)
+                  const SizedBox(height: 32),
+                if (showCancelButton || showConfirmButton)
+                  (showCancelButton && !showConfirmButton) || (!showCancelButton && showConfirmButton)
+                    ? MyButton.filedLong(
+                        onPressed: () {
+                          Get.back();
+                          showCancelButton ? onCancel?.call() : onConfirm?.call();
+                        }, 
+                        text: showCancelButton ? cancelText ?? '确认' : confirmText ?? '确认', 
+                        textColor: Theme.of(context).myColors.onPrimary,
+                      )
+                    : Row(children: [
+                        Expanded(child: MyButton.filedLong(
+                          onPressed: () {
+                            Get.back();
+                            onCancel?.call();
+                          }, 
+                          text: cancelText ?? '取消', 
+                          backgroundColor: Theme.of(context).myColors.buttonDisable,
+                          textColor: Theme.of(context).myColors.onBackground,
+                        )),
+                        const SizedBox(width: 20),
+                        Expanded(child: MyButton.filedLong(
+                          onPressed: () {
+                            Get.back();
+                            onConfirm?.call();
+                          }, 
+                          text: confirmText ?? '确认', 
+                          textColor: Theme.of(context).myColors.onPrimary
+                        )),
+                      ]),
               ],
             ),
           ),

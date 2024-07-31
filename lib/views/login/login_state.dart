@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 
 import '../../common/common.dart';
@@ -10,11 +9,19 @@ class LoginState {
 
   final signState = SignState.loginForPassword.obs;
 
-  final isShow = false.obs;
-
   final _isRemenberPassword = false.obs;
   bool get isRemenberPassword => _isRemenberPassword.value;
   set isRemenberPassword(bool value) => _isRemenberPassword.value = value;
+
+  final _isLoading = false.obs;
+  bool get isLoading => _isLoading.value;
+  set isLoading(bool value) => _isLoading.value = value;
+
+  final _isButtonDisable = true.obs;
+  bool get isButtonDisable => _isButtonDisable.value;
+  set isButtonDisable(bool value) => _isButtonDisable.value = value;
+
+  String validate = '';
 }
 
 enum SignState {

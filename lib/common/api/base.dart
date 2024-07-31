@@ -9,4 +9,6 @@ class _Base {
   final String logout = '/base/logout';
   // 获取图形验证码
   final String captcha = '/base/captcha';
+  // 发送验证码
+  final String sendSms = '/base/sendSms';
 }

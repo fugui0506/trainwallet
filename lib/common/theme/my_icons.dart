@@ -21,7 +21,7 @@ class MyIcons {
   MyAssets get singleUncheck => const MyAssets(name: 'single_uncheck', style: MyAssetStyle.svg);
 
   MyAssets get logo => const MyAssets(name: 'logo', style: MyAssetStyle.svg);
-  MyAssets get customer => const MyAssets(name: 'customer', style: MyAssetStyle.svg);
+  MyAssets get customer => MyAssets(name: 'customer', style: MyAssetStyle.svg, color: myColors.iconDefault,);
 
 
   Widget loading({double? width, double? height, double? radius, EdgeInsetsGeometry? margin}) {
