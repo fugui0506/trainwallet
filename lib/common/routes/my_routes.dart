@@ -22,4 +22,7 @@ class MyRoutes {
 
   // 活体检测 / 人脸识别
   static const faceVerifiedView = '/face_verified_view';
+
+  // 客服列表
+  static const customerView = '/customer_view';
 }

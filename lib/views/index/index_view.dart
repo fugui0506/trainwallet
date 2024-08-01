@@ -125,7 +125,7 @@ class IndexView extends GetView<IndexController> {
             const SizedBox(width: 10),
             Expanded(child: MyButton.filedShort(onPressed: () => MyAlert.dialog(
               title: '测试全部都有',
-              message: '没事，我从全部收款方式那里去拿一下，把没有的去掉就行，我只是不想他们提这个需求，他们还说是 bug，我就受不了',
+              message: '没事，我就受不了我就受不了我就受不了我就受不了我就受不了我就受不了我就受不了我就受不了我就受不了我就受不了我就受不了',
               confirmText: '我忍',
               // cancelText: '我拒绝',
               onConfirm: () {
@@ -150,7 +150,7 @@ class IndexView extends GetView<IndexController> {
           Row(children: [
             Expanded(child: MyButton.filedShort(onPressed: () => Get.toNamed(MyRoutes.loginView), text: '登录页')),
             const SizedBox(width: 10),
-            Expanded(child: MyButton.filedShort(onPressed: () => Get.toNamed(MyRoutes.loginView), text: '登录页')),
+            Expanded(child: MyButton.filedShort(onPressed: () => Get.toNamed(MyRoutes.frameView), text: '首页')),
             const SizedBox(width: 10),
             Expanded(child: MyButton.filedShort(onPressed: () => Get.toNamed(MyRoutes.loginView), text: '登录页')),
           ]),

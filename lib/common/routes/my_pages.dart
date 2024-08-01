@@ -56,5 +56,12 @@ class MyPages {
       page: () => const FaceVerifiedView(),
       binding: FaceVerifiedViewBinding(),
     ),
+
+    // 客服
+    GetPage(
+      name: MyRoutes.customerView,
+      page: () => const CustomerView(),
+      binding: CustomerBinding(),
+    ),
   ];
 }

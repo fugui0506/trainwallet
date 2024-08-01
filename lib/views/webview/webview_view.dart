@@ -14,7 +14,7 @@ class WebviewView extends GetView<WebviewController> {
     /// appbar
     var appBar = MyAppBar.normal(
       context: context,
-      title: Lang.webViewTltle.tr,
+      title: controller.state.title,
     );
 
     /// 页面构成

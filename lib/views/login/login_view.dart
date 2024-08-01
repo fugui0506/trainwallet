@@ -20,11 +20,10 @@ class LoginView extends GetView<LoginController> {
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
+    final customerButtom = MyButton.icon(onPressed: controller.goCustomerView, icon: Theme.of(context).myIcons.customer);
     return MyAppBar.transparent(
       context: context,
-      actions: [
-        MyButton.icon(onPressed: () {}, icon: Theme.of(context).myIcons.customer)
-      ],
+      actions: [customerButtom],
     );
   }
 
@@ -40,9 +39,12 @@ class LoginView extends GetView<LoginController> {
   }
 
   Widget _buildTitle(BuildContext context) {
+    final loginTitleBackgroundLeft = Theme.of(context).myIcons.loginTitleBackgroundLeft;
+    final loginTitleBackgroundRight = Theme.of(context).myIcons.loginTitleBackgroundRight;
+
     final background = controller.state.signState.value == SignState.loginForPassword || controller.state.signState.value == SignState.loginForCode
-      ? Theme.of(context).myIcons.loginTitleBackgroundLeft
-      : Theme.of(context).myIcons.loginTitleBackgroundRight;
+      ? Row(children: [loginTitleBackgroundLeft, const Expanded(child: SizedBox())])
+      : Row(children: [const Expanded(child: SizedBox()), loginTitleBackgroundRight]);
 
     final leftSelect = Stack(alignment: AlignmentDirectional.center, children: [
       const SizedBox(width: double.infinity, height: 60),
@@ -68,13 +70,9 @@ class LoginView extends GetView<LoginController> {
       : rightUnselect;
 
     final content = Row(children: [Expanded(child: left), Expanded(child: right)]);
+    final children = [background, content];
 
-    return Stack(
-      alignment: controller.state.signState.value == SignState.loginForPassword || controller.state.signState.value == SignState.loginForCode
-        ? AlignmentDirectional.centerStart
-        : AlignmentDirectional.centerEnd,
-      children: [background, content]
-    );
+    return Stack(alignment: AlignmentDirectional.center, children: children);
   }
 
   Widget _buildForgotPasswordTitle(BuildContext context) {
@@ -162,7 +160,7 @@ class LoginView extends GetView<LoginController> {
         const SizedBox(height: 20),
         Obx(() => controller.state.isLoading  
           ? MyButton.loading(context) 
-          : MyButton.filedLong(onPressed: controller.state.isButtonDisable ? null : controller.onForgotPassword, text: Lang.loginViewForgotPassword.tr)),
+          : MyButton.filedLong(onPressed: controller.state.isButtonDisable ? null : controller.onForgotPassword, text: Lang.loginViewGetbackPassword.tr)),
         SizedBox(width: double.infinity, child: MyButton.text(onPressed: controller.goLoginForPasswrod, text: Lang.loginViewGobackLogin.tr)),
       ]),
     );

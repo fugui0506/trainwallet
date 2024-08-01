@@ -1,5 +1,6 @@
 // import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:cgwallet/common/config/config.dart';
+import 'package:cgwallet/common/models/web_view_arguments.dart';
 import 'package:cgwallet/common/utils/utils.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -7,10 +8,17 @@ import 'index.dart';
 
 class WebviewController extends GetxController {
   final state = WebviewState();
+  final WebViewArgumentsModel? arguments = Get.arguments;
 
   // InAppWebViewController? webController;
   late final WebViewController webController;
-  final url = Uri.parse('https://walletqiliao.z13a70.com/?cert=CIQCEAUYASCSAiiBxpu5_jE.62R3StIjnJfeyPi8Svz9YldyjW5EBcxtcvwDrupyc-MsAs1IA6PAzlybxJGvdvKj6lZk18vgvm2t7EQFGggeDQ"');
+
+  @override
+  void onInit() {
+    super.onInit();
+    if (arguments?.title != null) state.title = arguments!.title!;
+    if (arguments?.url != null) state.url = arguments!.url!;
+  }
 
   @override
   onReady() async {
@@ -32,7 +40,7 @@ class WebviewController extends GetxController {
           MyLogger.w(error);
         },
       ))
-    ..loadRequest(url);
+    ..loadRequest(Uri.parse(state.url));
   }
 
   Future<void> runJavaScript() async {

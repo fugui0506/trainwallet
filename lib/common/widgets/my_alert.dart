@@ -66,8 +66,8 @@ class MyAlert {
                   const SizedBox(height: 20),
                 if (message != null)
                   Text(message, style: Theme.of(context).myStyles.labelText,),
-                if (showCancelButton || showConfirmButton)
-                  const SizedBox(height: 32),
+                if (message != null)
+                  const SizedBox(height: 20),
                 if (showCancelButton || showConfirmButton)
                   (showCancelButton && !showConfirmButton) || (!showCancelButton && showConfirmButton)
                     ? MyButton.filedLong(
@@ -88,7 +88,7 @@ class MyAlert {
                           backgroundColor: Theme.of(context).myColors.buttonDisable,
                           textColor: Theme.of(context).myColors.onBackground,
                         )),
-                        const SizedBox(width: 20),
+                        const SizedBox(width: 10),
                         Expanded(child: MyButton.filedLong(
                           onPressed: () {
                             Get.back();

@@ -13,4 +13,6 @@ class _Base {
   final String sendSms = '/base/sendSms';
   // 注册
   final String register = '/base/register';
+  // 忘记密码
+  final String forgetPassword = '/base/forgetPassword';
 }

@@ -50,7 +50,9 @@ class LoginController extends GetxController {
     }
   }
 
-  
+  void goCustomerView() {
+    Get.toNamed(MyRoutes.customerView);
+  }
 
   void goLogin() {
     state.signState.value = SignState.loginForPassword;
@@ -112,8 +114,21 @@ class LoginController extends GetxController {
     );
   }
 
-  void onForgotPassword() {
-
+  void onForgotPassword() async {
+    Get.focusScope?.unfocus();
+    state.isLoading = true;
+    showCaptcha(
+      onSuccess: (value) async {
+        MyAlert.block();
+        await forgotPassword();
+      },
+      onError: () {
+        state.isLoading = false;
+      },
+      onClose: () {
+        state.isLoading = false;
+      },
+    );
   }
 
   void onLoginForPhoneCode() {
@@ -275,6 +290,25 @@ class LoginController extends GetxController {
     );
   }
 
+  Future<void> forgotPassword() async {
+    await DioService.to.post(ApiPath.base.forgetPassword, 
+      onSuccess: (code, msg, data) async {
+        goLogin();
+        MyAlert.snackbar(msg);
+      },
+      data: {
+        "phone": phoneTextController.text,
+        "newPassword": passwordTextController.text.encrypt(MyConfig.key.aesKey),
+        "reNewPassword": repasswordTextController.text.encrypt(MyConfig.key.aesKey),
+        "verificationCode": phoneCodeTextController.text,
+      },
+      onError: () {
+        Get.back();
+        state.isLoading = false;
+      }
+    );
+  }
+
   Future<void> loginForPhoneCode() async {
     await DioService.to.post<UserInfoModel>(ApiPath.base.phoneLogin, 
       onSuccess: (code, msg, data) async {
@@ -288,6 +322,10 @@ class LoginController extends GetxController {
         "captcha": caputcharTextController.text,
         "captchaId": state.captchForPassword.value.captchaId,
         'validate': state.validate,
+      },
+      onError: () {
+        Get.back();
+        state.isLoading = false;
       }
     );
   }

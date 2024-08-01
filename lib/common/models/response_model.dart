@@ -21,10 +21,4 @@ class ResponseModel {
     "data": data,
     "msg": msg,
   };
-
-  factory ResponseModel.err() => ResponseModel(
-    code: -200,
-    data: {},
-    msg: 'msg',
-  );
 }

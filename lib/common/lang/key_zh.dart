@@ -34,5 +34,5 @@ const Map<String, String> zh = {
   Lang.loginViewLoginForPassword: '密码登录',
   Lang.loginViewLoginForCode: '验证码登录',
   Lang.loginViewForgotPassword: '忘记密码',
-  Lang.loginViewGetbackPassword: '确认',
+  Lang.loginViewGetbackPassword: '确定',
 };
