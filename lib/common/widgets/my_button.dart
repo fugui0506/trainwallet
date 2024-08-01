@@ -1,4 +1,5 @@
 import 'package:cgwallet/common/common.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -60,10 +61,7 @@ class MyButton extends StatelessWidget {
   factory MyButton.loading(BuildContext context) => MyButton(
     myButtonStyle: MyButtonStyle.filledButtonLong,
     onPressed: null,
-    child: SizedBox(width: 16, height: 16, child: CircularProgressIndicator(
-      color: Theme.of(context).myColors.primary,
-      strokeWidth: 2,
-    )),
+    child: CupertinoActivityIndicator(color: Theme.of(context).myColors.onButtonDisable,),
   );
 
   // 填充颜色的短按钮

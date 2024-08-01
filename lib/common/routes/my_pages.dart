@@ -42,5 +42,19 @@ class MyPages {
       page: () => const ScanView(),
       binding: ScanBinding(),
     ),
+
+    // 主界面
+    GetPage(
+      name: MyRoutes.frameView,
+      page: () => const FrameView(),
+      binding: FrameBinding(),
+    ),
+
+    // 人脸识别
+    GetPage(
+      name: MyRoutes.faceVerifiedView,
+      page: () => const FaceVerifiedView(),
+      binding: FaceVerifiedViewBinding(),
+    ),
   ];
 }

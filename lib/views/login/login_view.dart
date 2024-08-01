@@ -77,46 +77,93 @@ class LoginView extends GetView<LoginController> {
     );
   }
 
+  Widget _buildForgotPasswordTitle(BuildContext context) {
+    return Stack(alignment: AlignmentDirectional.center, children: [
+      const SizedBox(width: double.infinity, height: 60),
+      Positioned(bottom: 4, child: Theme.of(context).myIcons.loginTitleSelect),
+      FittedBox(child: Text(Lang.loginViewForgotPassword.tr, style: Theme.of(context).myStyles.loginPasswordTitle)),
+    ]);
+  }
+
   Widget _buildContent(BuildContext context) {
     final inputAccount = MyInput.account(context, controller.accountTextController, controller.accountFocusNode);
-    final inputPassword = MyInput.password(context, controller.passwordTextController, controller.passwordFocusNode);
+    final inputPassword = MyInput.password(context, controller.passwordTextController, controller.passwordFocusNode, Lang.inputPasswordHintText.tr);
+    final inputRepassword = MyInput.password(context, controller.repasswordTextController, controller.repasswordFocusNode, Lang.inputRepasswordHintText.tr);
     final inputPhone = MyInput.phone(context, controller.phoneTextController, controller.phoneFocusNode);
     final inputPhoneCode = MyInput.phoneCode(context, controller.phoneCodeTextController, controller.phoneCodeFocusNode, controller.phoneTextController);
     // final inputCaptcha = MyInput.captcha(context, controller.caputcharTextController, controller.caputcharFocusNode, controller.state.captchForPassword);
 
     final loginForPassword = Padding(padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
       child: Column(children: [
-        const SizedBox(height: 32),
+        const SizedBox(height: 16),
         inputAccount,
-        const SizedBox(height: 10),
+        const SizedBox(height: 6),
         inputPassword,
-        const SizedBox(height: 10),
+        const SizedBox(height: 6),
         // inputCaptcha,
         // const SizedBox(height: 10),
         _buildRemenberAccountButtton(context),
         const SizedBox(height: 32),
         Obx(() => controller.state.isLoading  
           ? MyButton.loading(context) 
-          : MyButton.filedLong(
-              onPressed: controller.state.isButtonDisable ? null : controller.onLoginForPassword, 
-              text: Lang.loginViewLogin.tr)),
+          : MyButton.filedLong(onPressed: controller.state.isButtonDisable ? null : controller.onLoginForPassword, text: Lang.loginViewLogin.tr)),
         _buildLoginForCodeAndFogotPasswordButton(context),
       ]),
     );
 
     final loginForCode = Padding(padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
       child: Column(children: [
-        const SizedBox(height: 32),
+        const SizedBox(height: 16),
         inputPhone,
-        const SizedBox(height: 10),
+        const SizedBox(height: 6),
         inputPhoneCode,
-        const SizedBox(height: 10),
-        // inputCaptcha
-        // const SizedBox(height: 10),
+        // const SizedBox(height: 6),
+        // inputCaptcha,
+        const SizedBox(height: 6),
         _buildRemenberAccountButtton(context),
         const SizedBox(height: 32),
-        MyButton.filedLong(onPressed: controller.onLoginForPhoneCode, text: Lang.loginViewLogin.tr),
+        Obx(() => controller.state.isLoading  
+          ? MyButton.loading(context) 
+          : MyButton.filedLong(onPressed: controller.state.isButtonDisable ? null : controller.onLoginForPhoneCode, text: Lang.loginViewLogin.tr)),
         _buildLoginForPasswordAndFogotPasswordButton(context),
+      ]),
+    );
+
+    final register = Padding(padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+      child: Column(children: [
+        const SizedBox(height: 16),
+        inputAccount,
+        const SizedBox(height: 6),
+        inputPassword,
+        const SizedBox(height: 6),
+        inputRepassword,
+        const SizedBox(height: 6),
+        inputPhone,
+        const SizedBox(height: 6),
+        inputPhoneCode,
+        const SizedBox(height: 32),
+        Obx(() => controller.state.isLoading  
+          ? MyButton.loading(context) 
+          : MyButton.filedLong(onPressed: controller.state.isButtonDisable ? null : controller.onRegister, text: Lang.loginViewRegister.tr)),
+      ]),
+    );
+
+    final fogotPassword = Padding(padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+      child: Column(children: [
+        _buildForgotPasswordTitle(context),
+        const SizedBox(height: 6),
+        inputPhone,
+        const SizedBox(height: 6),
+        inputPhoneCode,
+        const SizedBox(height: 6),
+        inputPassword,
+        const SizedBox(height: 6),
+        inputRepassword,
+        const SizedBox(height: 20),
+        Obx(() => controller.state.isLoading  
+          ? MyButton.loading(context) 
+          : MyButton.filedLong(onPressed: controller.state.isButtonDisable ? null : controller.onForgotPassword, text: Lang.loginViewForgotPassword.tr)),
+        SizedBox(width: double.infinity, child: MyButton.text(onPressed: controller.goLoginForPasswrod, text: Lang.loginViewGobackLogin.tr)),
       ]),
     );
 
@@ -127,6 +174,10 @@ class LoginView extends GetView<LoginController> {
         loginForPassword,
       if (controller.state.signState.value == SignState.loginForCode)
         loginForCode,
+      if (controller.state.signState.value == SignState.register)
+        register,
+      if (controller.state.signState.value == SignState.forgotPassword)
+        fogotPassword,
     ]));
   }
 

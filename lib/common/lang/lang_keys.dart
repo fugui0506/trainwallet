@@ -7,6 +7,7 @@ abstract class Lang {
   // 输入框相关
   static const inputAccountHintText = 'input_account_hint_text';
   static const inputPasswordHintText = 'input_password_hint_text';
+  static const inputRepasswordHintText = 'input_repassword_hint_text';
   static const inputCaptchaHintText = 'input_captcha_hint_text';
   static const inputCaptchaSendText = 'input_captcha_send_text';
   static const inputPhoneHintText = 'input_phone_hint_text';
@@ -29,8 +30,10 @@ abstract class Lang {
   static const loginViewTitleForgotPassword = 'login_view_title_forget_password';
   static const loginViewRemenberAccount = 'login_view_remenber_account';
   static const loginViewLogin = 'login_view_login';
+  static const loginViewGobackLogin = 'login_view_go_back_login';
+  static const loginViewRegister = 'login_view_register';
   static const loginViewLoginForPassword = 'login_view_login_for_password';
   static const loginViewLoginForCode = 'login_view_login_for_code';
   static const loginViewForgotPassword = 'login_view_forget_password';
-  
+  static const loginViewGetbackPassword = 'login_view_get_back_password';
 }

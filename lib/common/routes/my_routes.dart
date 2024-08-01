@@ -16,4 +16,10 @@ class MyRoutes {
 
   // 登录界面
   static const loginView = '/login_view';
+
+  // 主页面
+  static const frameView = '/frame_view';
+
+  // 活体检测 / 人脸识别
+  static const faceVerifiedView = '/face_verified_view';
 }

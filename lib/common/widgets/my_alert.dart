@@ -1,5 +1,6 @@
 import 'package:cgwallet/common/common.dart';
 import 'package:cgwallet/common/widgets/my_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,12 +23,9 @@ class MyAlert {
 
   static void loading(BuildContext context) {
     if (Get.isDialogOpen != null && Get.isDialogOpen!) return;
-    const loadingBox = Center(child: SizedBox(width: 20, height: 20, child: CircularProgressIndicator(
-      color: Colors.white,
-      strokeWidth: 2,
-    )));
+    final loadingBox = Center(child: SizedBox(width: 20, height: 20, child: CupertinoActivityIndicator(color: Theme.of(context).myColors.onPrimary, radius: 14)));
     final child = Center(child: MyCard.loading(context, loadingBox));
-    Get.dialog(child, barrierDismissible: false);
+    Get.dialog(child, barrierDismissible: false, useSafeArea: false);
   }
 
   static void block() {

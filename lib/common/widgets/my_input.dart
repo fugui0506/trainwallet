@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:cgwallet/common/common.dart';
 import 'package:cgwallet/common/widgets/my_alert.dart';
 import 'package:cgwallet/common/widgets/my_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -58,6 +59,10 @@ class MyInput extends StatelessWidget {
   factory MyInput.account(BuildContext context, TextEditingController controller, FocusNode focusNode) {
     final showSuffixIcon = false.obs;
 
+    if (controller.text.isNotEmpty) {
+      showSuffixIcon.value = true;
+    }
+
     final suffixIcon = Obx(() => showSuffixIcon.value
       ? MyButton.icon(
           onPressed: () {
@@ -93,9 +98,13 @@ class MyInput extends StatelessWidget {
   }
 
   /// 密码输入框
-  static Widget password(BuildContext context, TextEditingController controller, FocusNode focusNode) {
+  static Widget password(BuildContext context, TextEditingController controller, FocusNode focusNode, String hintText) {
     final showSuffixIcon = false.obs;
     final obscureText = true.obs;
+
+    if (controller.text.isNotEmpty) {
+      showSuffixIcon.value = true;
+    }
 
     void onChanged(String text) {
       if (text.isEmpty) {
@@ -136,7 +145,7 @@ class MyInput extends StatelessWidget {
       suffixIcon: showSuffixIcon.value 
         ? obscureText.value ? showIcon : hideIcon
         : null,
-      hintText: Lang.inputPasswordHintText.tr,
+      hintText: hintText,
       onChanged: onChanged,
     ));
   }
@@ -169,9 +178,7 @@ class MyInput extends StatelessWidget {
             color: Theme.of(context).myColors.onBackground.withOpacity(0.05),
             width: 100,
             height: 40,
-            child: Center(child: SizedBox(width: 16, height: 16, child: CircularProgressIndicator(
-              strokeWidth: 2, color: Theme.of(context).myColors.primary,
-            )))
+            child: const Center(child: CupertinoActivityIndicator())
           )
        : source.value.picPath.isNotEmpty
           ? Image.memory(base64Decode(source.value.picPath.split(',').last),
@@ -203,6 +210,10 @@ class MyInput extends StatelessWidget {
   /// 账号输入框
   factory MyInput.phone(BuildContext context, TextEditingController controller, FocusNode focusNode) {
     final showSuffixIcon = false.obs;
+
+    if (controller.text.isNotEmpty) {
+      showSuffixIcon.value = true;
+    }
 
     final suffixIcon = Obx(() => showSuffixIcon.value
       ? MyButton.icon(

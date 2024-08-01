@@ -7,6 +7,7 @@ const Map<String, String> zh = {
   // 输入框相关
   Lang.inputAccountHintText: '请输入账号',
   Lang.inputPasswordHintText: '请输入密码',
+  Lang.inputRepasswordHintText: '请再次输入密码',
   Lang.inputCaptchaHintText: '请输入验证码',
   Lang.inputCaptchaSendText: '点击获取验证码',
   Lang.inputPhoneHintText: '请输入手机号码',
@@ -28,7 +29,10 @@ const Map<String, String> zh = {
   Lang.loginViewTitleForgotPassword: '忘记密码',
   Lang.loginViewRemenberAccount: '记住账号',
   Lang.loginViewLogin: '登录',
+  Lang.loginViewGobackLogin: '返回登录',
+  Lang.loginViewRegister: '注册',
   Lang.loginViewLoginForPassword: '密码登录',
   Lang.loginViewLoginForCode: '验证码登录',
   Lang.loginViewForgotPassword: '忘记密码',
+  Lang.loginViewGetbackPassword: '确认',
 };

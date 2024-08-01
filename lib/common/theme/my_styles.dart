@@ -13,6 +13,7 @@ class MyStyles {
 
   // 登录页面Title
   TextStyle get loginTitleSelect => TextStyle(color: myColors.primary, fontSize: 16);
+  TextStyle get loginPasswordTitle => TextStyle(color: myColors.primary, fontSize: 18);
   TextStyle get loginTitleUnselect => TextStyle(color: myColors.primary, fontSize: 16);
 
   // 高度是0的Label样式

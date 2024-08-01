@@ -7,6 +7,7 @@ const Map<String, String> en = {
   // 输入框相关
   Lang.inputAccountHintText: 'Please enter your account',
   Lang.inputPasswordHintText: 'Please enter your password',
+  Lang.inputRepasswordHintText: 'Please enter your repassword',
   Lang.inputCaptchaHintText: 'Please enter captcha',
   Lang.inputCaptchaSendText: 'Click get the captcha',
   Lang.inputPhoneHintText: 'Please enter your phone number',
@@ -28,7 +29,10 @@ const Map<String, String> en = {
   Lang.loginViewTitleForgotPassword: 'Forgot password',
   Lang.loginViewRemenberAccount: 'Remenber account',
   Lang.loginViewLogin: 'Login',
+  Lang.loginViewGobackLogin: 'Go back login',
+  Lang.loginViewRegister: 'Register',
   Lang.loginViewLoginForPassword: 'Login for password',
   Lang.loginViewLoginForCode: 'Login for code',
   Lang.loginViewForgotPassword: 'Forgot password',
+  Lang.loginViewGetbackPassword: 'Confirm',
 };

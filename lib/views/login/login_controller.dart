@@ -40,19 +40,41 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    setRemberAccount();
+    textEditingControllerAddLinster();
+  }
+  void setRemberAccount() {
     if (SharedService.to.getString(MyConfig.shard.accountKey).isNotEmpty) {
       state.isRemenberPassword = true;
       accountTextController.text = SharedService.to.getString(MyConfig.shard.accountKey);
     }
-    textEditingControllerAddLinster();
   }
+
+  
 
   void goLogin() {
     state.signState.value = SignState.loginForPassword;
+    reset();
   }
 
   void goRegister() {
     state.signState.value = SignState.register;
+    reset();
+  }
+
+  void goLoginForCode() {
+    state.signState.value = SignState.loginForCode;
+    reset();
+  }
+
+  void goLoginForPasswrod() {
+    state.signState.value = SignState.loginForPassword;
+    reset();
+  }
+
+  void goForgotPassword() {
+    state.signState.value = SignState.forgotPassword;
+    reset();
   }
 
   void onLoginForPassword() async {
@@ -73,28 +95,42 @@ class LoginController extends GetxController {
     );
   }
 
+  void onRegister() {
+    Get.focusScope?.unfocus();
+    state.isLoading = true;
+    showCaptcha(
+      onSuccess: (value) async {
+        MyAlert.block();
+        await register();
+      },
+      onError: () {
+        state.isLoading = false;
+      },
+      onClose: () {
+        state.isLoading = false;
+      },
+    );
+  }
+
+  void onForgotPassword() {
+
+  }
+
   void onLoginForPhoneCode() {
     Get.focusScope?.unfocus();
+    state.isLoading = true;
     showCaptcha(
       onSuccess: (value) async {
         MyAlert.block();
         await loginForPhoneCode();
       },
-      onError: () {},
-      onClose: () {},
+      onError: () {
+        state.isLoading = false;
+      },
+      onClose: () {
+        state.isLoading = false;
+      },
     );
-  }
-
-  void goLoginForCode() {
-    state.signState.value = SignState.loginForCode;
-  }
-
-  void goLoginForPasswrod() {
-    state.signState.value = SignState.loginForPassword;
-  }
-
-  void goForgotPassword() {
-    state.signState.value = SignState.forgotPassword;
   }
 
   void onRemenberAccount() {
@@ -118,49 +154,88 @@ class LoginController extends GetxController {
         state.isButtonDisable = false;
       }
     }
+
+    if (state.signState.value == SignState.loginForCode) {
+      if (phoneTextController.text.isEmpty || phoneCodeTextController.text.isEmpty) {
+        state.isButtonDisable = true;
+      } else {
+        state.isButtonDisable = false;
+      }
+    }
+
+    if (state.signState.value == SignState.register) {
+      if (accountTextController.text.isEmpty || passwordTextController.text.isEmpty || repasswordTextController.text.isEmpty || phoneTextController.text.isEmpty || phoneCodeTextController.text.isEmpty) {
+        state.isButtonDisable = true;
+      } else {
+        state.isButtonDisable = false;
+      }
+    }
+
+    if (state.signState.value == SignState.forgotPassword) {
+      if (passwordTextController.text.isEmpty || repasswordTextController.text.isEmpty || phoneTextController.text.isEmpty || phoneCodeTextController.text.isEmpty) {
+        state.isButtonDisable = true;
+      } else {
+        state.isButtonDisable = false;
+      }
+    }
   }
 
   void reset() {
-    accountTextController.text = '';
+    Get.focusScope?.unfocus();
+    if (state.signState.value == SignState.loginForPassword) {
+      setRemberAccount();
+    } else {
+      accountTextController.text = '';
+    }
     passwordTextController.text = '';
     repasswordTextController.text = '';
     caputcharTextController.text = '';
     phoneTextController.text = '';
     phoneCodeTextController.text = '';
-    state.isButtonDisable = false;
-    state.isLoading = false;
+    linster();
+  }
+
+  // 检查是否被风控
+  Future<void> checkRiskControlled() async {
+    if (UserService.to.userInfo.value.user.riskMessage.isNotEmpty && UserService.to.userInfo.value.user.enable == 2 && UserService.to.userInfo.value.user.isAuth != 3) {
+      Get.back();
+      final result = await Get.toNamed(MyRoutes.faceVerifiedView);
+      if (result == null) {
+        state.isLoading = false;
+        return;
+      }
+    }
+
+    Get.back();
+    Get.offAllNamed(MyRoutes.frameView);
+    
+    if (UserService.to.userInfo.value.user.riskMessage.isNotEmpty && UserService.to.userInfo.value.user.isAuth == 3) {
+      MyAlert.snackbar('账号无法完成人脸识别,请联系客服');
+    }
+  }
+
+  // 设置用户信息：登录成功后
+  void setUserInfo(UserInfoModel data) {
+    UserService.to.userInfo.value = data;
+    UserService.to.userInfo.update((val) {});
+    UserService.to.lastIp = data.user.lastIp;
+    UserService.to.lastLoginTime = data.user.lastAt;
   }
 
   Future<void> loginForPassword() async {
     await DioService.to.post<UserInfoModel>(ApiPath.base.accountLogin, 
-      onSuccess: (code, msg, data) {
-        UserService.to.userInfo.value = data;
-        UserService.to.userInfo.update((val) {});
-        UserService.to.lastIp = data.user.lastIp;
-        UserService.to.lastLoginTime = data.user.lastAt;
+      onSuccess: (code, msg, data) async {
+        setUserInfo(data);
 
+        // 是否保存账号信息
         if (state.isRemenberPassword) {
           SharedService.to.setString(MyConfig.shard.accountKey, accountTextController.text);
         } else {
           SharedService.to.remove(MyConfig.shard.accountKey);
         }
 
-        if (UserService.to.userInfo.value.user.riskMessage.isNotEmpty && UserService.to.userInfo.value.user.enable == 2 && UserService.to.userInfo.value.user.isAuth != 3) {
-          // final result = await Get.toNamed(MyRoutes.faceVerifiedView);
-          // if (result == null) {
-          //   state.isLoging = false;
-          //   state.isButtonEnabled = true;
-          //   return;
-          // }
-        }
+        await checkRiskControlled();
 
-        // Get.offAllNamed(MyRoutes.appFrameView);
-        
-        if (UserService.to.userInfo.value.user.riskMessage.isNotEmpty && UserService.to.userInfo.value.user.isAuth == 3) {
-          MyAlert.snackbar('账号无法完成人脸识别,请联系客服');
-        }
-
-        Get.back();
       },
       onModel: (json) => UserInfoModel.fromJson(json),
       data: {
@@ -177,25 +252,42 @@ class LoginController extends GetxController {
     );
   }
 
-  Future<void> loginForPhoneCode() async {
-    await DioService.to.post<UserInfoModel>(ApiPath.base.accountLogin, 
-      onSuccess: (code, msg, data) {
-        UserService.to.userInfo.value = data;
-        UserService.to.userInfo.update((val) {});
-
-        if (state.isRemenberPassword) {
-          SharedService.to.setString(MyConfig.shard.accountKey, accountTextController.text);
-        } else {
-          SharedService.to.remove(MyConfig.shard.accountKey);
-        }
+  Future<void> register() async {
+    await DioService.to.post<UserInfoModel>(ApiPath.base.register, 
+      onSuccess: (code, msg, data) async {
+        setUserInfo(data);
+        await checkRiskControlled();
       },
       onModel: (json) => UserInfoModel.fromJson(json),
       data: {
-        "username": "fugui006",
-        "password": 'Fugui006'.encrypt(MyConfig.key.aesKey),
-        "captcha": "12222",
-        "captchaId": "898",
-        'validate': 'key',
+        'username': accountTextController.text,
+        'phone': phoneTextController.text,
+        'password': passwordTextController.text.encrypt(MyConfig.key.aesKey),
+        'repassword': repasswordTextController.text.encrypt(MyConfig.key.aesKey),
+        'verificationCode': phoneCodeTextController.text,
+        'captcha': caputcharTextController.text,
+        'captchaId': state.captchForPassword.value.captchaId,
+      },
+      onError: () {
+        Get.back();
+        state.isLoading = false;
+      }
+    );
+  }
+
+  Future<void> loginForPhoneCode() async {
+    await DioService.to.post<UserInfoModel>(ApiPath.base.phoneLogin, 
+      onSuccess: (code, msg, data) async {
+        setUserInfo(data);
+        await checkRiskControlled();
+      },
+      onModel: (json) => UserInfoModel.fromJson(json),
+      data: {
+        "phone": phoneTextController.text,
+        "verificationCode": phoneCodeTextController.text,
+        "captcha": caputcharTextController.text,
+        "captchaId": state.captchForPassword.value.captchaId,
+        'validate': state.validate,
       }
     );
   }

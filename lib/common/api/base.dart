@@ -11,4 +11,6 @@ class _Base {
   final String captcha = '/base/captcha';
   // 发送验证码
   final String sendSms = '/base/sendSms';
+  // 注册
+  final String register = '/base/register';
 }

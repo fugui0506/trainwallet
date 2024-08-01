@@ -119,7 +119,9 @@ class IndexView extends GetView<IndexController> {
           Row(children: [
             Expanded(child: MyButton.filedShort(onPressed: () => MyAlert.snackbar('message'), text: 'SnackBar弹窗')),
             const SizedBox(width: 10),
-            Expanded(child: MyButton.filedShort(onPressed: () {}, text: 'Loading弹窗')),
+            Expanded(child: MyButton.filedShort(onPressed: () {
+              MyAlert.loading(context);
+            }, text: 'Loading弹窗')),
             const SizedBox(width: 10),
             Expanded(child: MyButton.filedShort(onPressed: () => MyAlert.dialog(
               title: '测试全部都有',
