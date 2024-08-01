@@ -14,7 +14,6 @@ abstract class Lang {
   static const inputPhoneCodeHintText = 'input_phone_code_hint_text';
   static const inputSendSmsButtonText = 'input_send_sms_button_text';
 
-
   // 未知页面
   static const unknownViewTltle = 'unknown_view_title';
 
@@ -23,6 +22,8 @@ abstract class Lang {
 
   // 扫码页面
   static const scanViewTltle = 'scan_view_title';
+  static const scanViewMessage = 'scan_view_message';
+  static const scanViewResult = 'scan_view_result';
 
   // 登录界面
   static const loginViewTitleLogin = 'login_view_title_login';
@@ -36,4 +37,12 @@ abstract class Lang {
   static const loginViewLoginForCode = 'login_view_login_for_code';
   static const loginViewForgotPassword = 'login_view_forget_password';
   static const loginViewGetbackPassword = 'login_view_get_back_password';
+
+  // 主页面
+  static const bottomHome = 'bottom_home';
+  static const bottomFlashExchange = 'bottom_flash_exchange';
+  static const bottomScan = 'bottom_scan';
+  static const bottomChat = 'bottom_chat';
+  static const bottomMine = 'bottom_mine';
+
 }

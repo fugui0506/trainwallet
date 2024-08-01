@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.rightToLeftWithFade,
       getPages: MyPages.getPages,
       popGesture: true,
-      transitionDuration: MyConfig.app.timePage,
+      transitionDuration: MyConfig.app.timePageTransition,
       unknownRoute: MyPages.unknownRoute,
     );
   }

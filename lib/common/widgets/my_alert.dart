@@ -8,10 +8,10 @@ class MyAlert {
   static void snackbar(String message) {
     if (Get.isSnackbarOpen) return;
     Get.rawSnackbar(
-      messageText: Text(message, style: Get.theme.myStyles.onSnackbar),
+      messageText: Text(message, style: Get.theme.myStyles.onSnackbar, textAlign: TextAlign.center,),
       snackPosition: SnackPosition.TOP,
       borderRadius: 8,
-      margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
       animationDuration: const Duration(milliseconds: 500),
       duration: const Duration(milliseconds: 2000),

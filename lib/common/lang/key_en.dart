@@ -21,7 +21,9 @@ const Map<String, String> en = {
   Lang.webViewTltle: 'Web View Page',
 
   // 扫码页面
-  Lang.scanViewTltle: 'Scan Page',
+  Lang.scanViewTltle: 'Scan',
+  Lang.scanViewMessage: 'No barcode found!',
+  Lang.scanViewResult: 'Result:',
 
   // 登录界面
   Lang.loginViewTitleLogin: 'Login',
@@ -35,4 +37,11 @@ const Map<String, String> en = {
   Lang.loginViewLoginForCode: 'Login for code',
   Lang.loginViewForgotPassword: 'Forgot password',
   Lang.loginViewGetbackPassword: 'Confirm',
+
+  // 底部导航栏
+  Lang.bottomChat: 'Chat',
+  Lang.bottomFlashExchange: 'Exchange',
+  Lang.bottomHome: 'Home',
+  Lang.bottomMine: 'Me',
+  Lang.bottomScan: 'Scan',
 };

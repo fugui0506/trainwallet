@@ -10,7 +10,7 @@ class _App {
   // 重连间隔的基数
   final Duration timeRetry = const Duration(seconds: 5);
   // 页面切换动画时长
-  final Duration timePage = const Duration(milliseconds: 300);
+  final Duration timePageTransition = const Duration(milliseconds: 300);
 
   // 最大重连次数
   final int maxRetryAttempts = 7;

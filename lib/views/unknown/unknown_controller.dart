@@ -8,6 +8,6 @@ class UnknownController extends GetxController {
   @override
   void onReady() async {
     super.onReady();
-    await Future.delayed(MyConfig.app.timePage);
+    await Future.delayed(MyConfig.app.timePageTransition);
   }
 }

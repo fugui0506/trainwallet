@@ -178,9 +178,6 @@ class IndexView extends GetView<IndexController> {
 
 
           Theme.of(context).myIcons.loginTitleSelect,
-
-          Theme.of(context).myIcons.singleChecked,
-          Theme.of(context).myIcons.singleUncheck,
         ],
       ),
     );

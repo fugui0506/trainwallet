@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cgwallet/common/widgets/my_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,7 +15,7 @@ class ScanController extends GetxController {
   @override
   void onReady() async {
     super.onReady();
-    await Future.delayed(MyConfig.app.timePage);
+    await Future.delayed(MyConfig.app.timePageTransition);
   }
 
   @override
@@ -23,10 +24,12 @@ class ScanController extends GetxController {
     super.onClose();
   }
 
-  void onDetect(BarcodeCapture barcodeCapture) {
+  void onDetect(BarcodeCapture barcodeCapture) async {
     if (barcodeCapture.barcodes.first.displayValue != null) {
       MyLogger.w(barcodeCapture.barcodes.first.displayValue);
-      Get.back(result: barcodeCapture.barcodes.first.displayValue);
+      Get.back();
+      await Future.delayed(MyConfig.app.timePageTransition);
+      MyAlert.snackbar('${Lang.scanViewResult.tr} ${barcodeCapture.barcodes.first.displayValue}');
     }
   }
 
@@ -41,7 +44,7 @@ class ScanController extends GetxController {
       return;
     }
 
-    final BarcodeCapture? barcodes = await mobileScannerController.analyzeImage(
+    final BarcodeCapture? barcodeCapture = await mobileScannerController.analyzeImage(
       image.path,
     );
 
@@ -49,17 +52,10 @@ class ScanController extends GetxController {
       return;
     }
 
-
-    final SnackBar snackbar = barcodes != null
-        ? SnackBar(
-            content: Text('Barcode found! --> ${barcodes.barcodes.first.displayValue}'),
-            backgroundColor: Colors.green,
-          )
-        : const SnackBar(
-            content: Text('No barcode found!'),
-            backgroundColor: Colors.red,
-          );
-
-    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+    if (barcodeCapture != null) {
+      onDetect(barcodeCapture);
+    } else {
+      MyAlert.snackbar(Lang.scanViewMessage.tr);
+    }
   }
 }

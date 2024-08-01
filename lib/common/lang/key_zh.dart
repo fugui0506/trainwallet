@@ -21,7 +21,9 @@ const Map<String, String> zh = {
   Lang.webViewTltle: '浏览器',
 
   // 扫码页面
-  Lang.scanViewTltle: '扫码',
+  Lang.scanViewTltle: '扫一扫',
+  Lang.scanViewMessage: '未检测到任何信息',
+  Lang.scanViewResult: '扫描结果:',
 
   // 登录界面
   Lang.loginViewTitleLogin: '登录',
@@ -35,4 +37,12 @@ const Map<String, String> zh = {
   Lang.loginViewLoginForCode: '验证码登录',
   Lang.loginViewForgotPassword: '忘记密码',
   Lang.loginViewGetbackPassword: '确定',
+
+  // 底部导航栏
+  Lang.bottomChat: '会话',
+  Lang.bottomFlashExchange: '闪兑',
+  Lang.bottomHome: '首页',
+  Lang.bottomMine: '我的',
+  Lang.bottomScan: '扫一扫',
+
 };

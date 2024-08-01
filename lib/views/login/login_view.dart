@@ -196,7 +196,7 @@ class LoginView extends GetView<LoginController> {
   Widget _buildRemenberAccountButtton(BuildContext context) {
     final child = Row(children: [
       const SizedBox(width: 8),
-      Obx(() => controller.state.isRemenberPassword ? Theme.of(context).myIcons.singleChecked : Theme.of(context).myIcons.singleUncheck),
+      Obx(() => controller.state.isRemenberPassword ? Theme.of(context).myIcons.loginRemberAccount : Theme.of(context).myIcons.loginUnremberAccount),
       const SizedBox(width: 8),
       Text(Lang.loginViewRemenberAccount.tr, style: Theme.of(context).myStyles.labelText)
     ]);

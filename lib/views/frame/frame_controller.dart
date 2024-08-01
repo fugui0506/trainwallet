@@ -8,6 +8,18 @@ class FrameController extends GetxController {
   @override
   void onReady() async {
     super.onReady();
-    await Future.delayed(MyConfig.app.timePage);
+    await Future.delayed(MyConfig.app.timePageTransition);
+  }
+
+  void onChanged(int index) {
+    if (index == 4) {
+      goScanView();
+    } else {
+      state.pageIndex = index;
+    }
+  }
+
+  void goScanView() {
+    Get.toNamed(MyRoutes.scanView);
   }
 }

@@ -41,9 +41,11 @@ class MyColors {
 
   // 图标颜色
   Color get iconDefault => Get.isDarkMode ? const Color(0xFFF5F8FC) : const Color(0xFF333334);
+  Color get iconCopy => Get.isDarkMode ? const Color(0xFF333334) : const Color(0xFFF5F8FC);
 
   // 文本颜色
   Color get textDefault => Get.isDarkMode ? const Color(0xFFD1D1D1) : const Color(0xFF666666);
+  Color get textBottomUnselect => Get.isDarkMode ? const Color(0xFF85879A) : const Color(0xFFB7BACE);
 
   // 按钮禁用的背景颜色
   Color get buttonDisable => Get.isDarkMode ? const Color(0xFF434345) : const Color(0xFFD1D1D1);

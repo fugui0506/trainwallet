@@ -23,7 +23,7 @@ class WebviewController extends GetxController {
   @override
   onReady() async {
     super.onReady();
-    await Future.delayed(MyConfig.app.timePage);
+    await Future.delayed(MyConfig.app.timePageTransition);
     webController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate( NavigationDelegate(

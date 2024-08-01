@@ -35,6 +35,10 @@ class MyStyles {
   // 按钮文字的样式
   TextStyle get buttonText => const TextStyle(fontSize: 14);
 
+  // 底部导航栏的文字样式
+  TextStyle get bottomSelect => TextStyle(fontSize: 12, color: myColors.primary, height: 0);
+  TextStyle get bottomUnselect => TextStyle(fontSize: 12, color: myColors.textBottomUnselect, height: 0);
+
   // 长按钮的样式
   ButtonStyle getButtonFilledLong({Color? textColor, Color? buttonColor, double? radius}) => ButtonStyle(
     textStyle: MaterialStateProperty.all<TextStyle?>(buttonText),

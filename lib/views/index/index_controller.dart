@@ -10,7 +10,7 @@ class IndexController extends GetxController {
   @override
   void onReady() async {
     super.onReady();
-    await Future.delayed(MyConfig.app.timePage);
+    await Future.delayed(MyConfig.app.timePageTransition);
     if (MyConfig.urls.baseUrl.isEmpty || MyConfig.urls.wsUrl.isEmpty) {
       // 没有拿到配置文件的逻辑
       // Get.dialog(

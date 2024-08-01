@@ -12,29 +12,30 @@ class ScanView extends GetView<ScanController> {
 
   @override
   Widget build(BuildContext context) {
+    final mobileScanner = MobileScanner(
+      controller: controller.mobileScannerController,
+      onDetect: controller.onDetect,
+    );
+
+    final marker = Positioned.fill(
+      child: CustomPaint(
+        painter: HollowPainter(),
+      ),
+    );
+
+    final buttons = Column(
+      children: [
+        const Spacer(),
+        SafeArea(child: MyButton.filedLong(onPressed: () => controller.onScan(context), text: '相册'))
+      ],
+    );
+
     return Scaffold(
       appBar: MyAppBar.white(context: context, title: Lang.scanViewTltle.tr),
       backgroundColor: Theme.of(context).myColors.background,
       extendBodyBehindAppBar: true,
       extendBody: true,
-      body: Stack(children: [
-        MobileScanner(
-          controller: controller.mobileScannerController,
-          onDetect: controller.onDetect,
-        ),
-        // 蒙层
-        Positioned.fill(
-          child: CustomPaint(
-            painter: HollowPainter(),
-          ),
-        ),
-        Column(
-          children: [
-            const Spacer(),
-            SafeArea(child: MyButton.filedLong(onPressed: () => controller.onScan(context), text: '相册'))
-          ],
-        ),
-      ]),
+      body: Stack(children: [mobileScanner, marker, buttons]),
     );
   }
 }
