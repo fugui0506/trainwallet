@@ -101,7 +101,7 @@ class WebSocketService extends GetxService {
 
   /// 处理接收到的消息
   void _onMessageReceived(message) {
-    final messageDecode = MyCharacter.decode(message);
+    final messageDecode = MyTools.decode(message);
     MyLogger.w('<<<<< ✅ 接收到消息（ ${DateTime.now()} ) --> $messageDecode', isNewline: false);
   }
 
@@ -148,7 +148,7 @@ class WebSocketService extends GetxService {
   void _sendHeartBeat() {
     _cancelTimer(_heartbeatTimer);
     _heartbeatTimer = Timer.periodic(MyConfig.app.timeHeartbeat, (timer) {
-      send(MyCharacter.encode({"type": 9}));
+      send(MyTools.encode({"type": 9}));
     });
   }
 
@@ -182,7 +182,7 @@ class WebSocketService extends GetxService {
     if (_isConnected && _webSocketChannel != null) {
       try {
         _webSocketChannel?.sink.add(data);
-        MyLogger.w('>>>>> 🆕 消息发送成功（ ${DateTime.now()} ) --> ${MyCharacter.decode(data)}');
+        MyLogger.w('>>>>> 🆕 消息发送成功（ ${DateTime.now()} ) --> ${MyTools.decode(data)}');
       } catch (e) {
         MyLogger.w('>>>>> 😔 消息发送失败（ ${DateTime.now()} ) --> $e', isNewline: false);
         _retryConnection();

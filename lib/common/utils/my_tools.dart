@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-class MyCharacter {
+class MyTools {
   /// 字符串转二进制数组
   static Uint8List encode(dynamic data) {
     String jsonString;

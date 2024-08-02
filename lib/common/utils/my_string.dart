@@ -1,4 +1,7 @@
 import 'package:encrypt/encrypt.dart';
+import 'package:flutter/services.dart';
+
+import '../widgets/my_alert.dart';
 
 extension StringExtension on String {
   // 加密
@@ -79,18 +82,18 @@ extension StringExtension on String {
   }
 
   /// 手机号验证
-  bool isChinaPhone(String str) {
-    return RegExp(r"^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$").hasMatch(str);
+  bool isChinaPhone() {
+    return RegExp(r"^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$").hasMatch(this);
   }
 
   /// 纯数字验证
-  bool isNumber(String str) {
-    return RegExp(r"^\d{6}$").hasMatch(str);
+  bool isNumber() {
+    return RegExp(r"^\d{6}$").hasMatch(this);
   }
 
   /// 邮箱验证
-  bool isEmail(String str) {
-    return RegExp(r"^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$").hasMatch(str);
+  bool isEmail() {
+    return RegExp(r"^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$").hasMatch(this);
   }
 
   /// 验证URL
@@ -122,5 +125,11 @@ extension StringExtension on String {
   /// 验证用户名 6-16位 字母开头，可以包含数字和下划线
   bool isUserNameSenond() {
     return RegExp(r"^[a-zA-Z]\w{5,15}$").hasMatch(this);
+  }
+
+  /// 复制字符串到粘贴板
+  Future<void> copyToClipBoard() async {
+    await Clipboard.setData(ClipboardData(text: this));
+    MyAlert.snackbar('已成功复制到粘贴板');
   }
 }
