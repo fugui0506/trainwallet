@@ -96,7 +96,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     Widget? leadingButton;
     if (Navigator.canPop(context)) {
-      leadingButton = IconButton(onPressed: () => Get.back(), 
+      leadingButton = IconButton(onPressed: () {
+        Get.focusScope?.unfocus();
+        Get.back();
+      }, 
         icon: Container(color: Theme.of(context).myColors.primary.withOpacity(0), 
           width: double.infinity, 
           height: double.infinity, 

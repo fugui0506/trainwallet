@@ -22,15 +22,17 @@ class FrameView extends GetView<FrameController> {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        IndexedStack(
-          index: controller.state.pageIndex,
-          children:const [
-            HomeView(),
-            FlashExchangeView(),
-            ChatView(),
-            MineView(),
-          ],
-        ),
+        Column(children: [
+          Expanded(child: IndexedStack(
+            index: controller.state.pageIndex,
+            children: const [
+              HomeView(),
+              FlashExchangeView(),
+              ChatView(),
+              MineView(),
+          ])),
+          SizedBox(height: controller.state.bottomHeight + MediaQuery.of(context).padding.bottom),
+        ]),
         _buildBottomNavigationBar(context),
       ],
     );
@@ -47,26 +49,29 @@ class FrameView extends GetView<FrameController> {
       ])),
     );
 
+    const iconHeight = 24.0;
+    const textHeight = 18.0;
+
     final bottomItems = Row(children: [
       Expanded(child: MyButton.widget(onPressed: () => controller.onChanged(0), child: Container(color: Theme.of(context).myColors.background.withOpacity(0), child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        SizedBox(height: 24, child: controller.state.pageIndex == 0 ? Theme.of(context).myIcons.bottomHome1 : Theme.of(context).myIcons.bottomHome0,),
-        SizedBox(height: 18, width: double.infinity, child: Center(child: FittedBox(child: Text(Lang.bottomHome.tr, style: controller.state.pageIndex == 0 ? Theme.of(context).myStyles.bottomSelect : Theme.of(context).myStyles.bottomUnselect)))),
+        SizedBox(height: iconHeight, child: controller.state.pageIndex == 0 ? Theme.of(context).myIcons.bottomHome1 : Theme.of(context).myIcons.bottomHome0,),
+        SizedBox(height: textHeight, width: double.infinity, child: Center(child: FittedBox(child: Text(Lang.bottomHome.tr, style: controller.state.pageIndex == 0 ? Theme.of(context).myStyles.bottomSelect : Theme.of(context).myStyles.bottomUnselect)))),
       ])))),
        Expanded(child: MyButton.widget(onPressed: () => controller.onChanged(1), child: Container(color: Theme.of(context).myColors.background.withOpacity(0), child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        SizedBox(height: 24, child: controller.state.pageIndex == 1 ? Theme.of(context).myIcons.bottomFlash1 : Theme.of(context).myIcons.bottomFlash0,),
-        SizedBox(height: 18, width: double.infinity, child: Center(child: FittedBox(child: Text(Lang.bottomFlashExchange.tr, style: controller.state.pageIndex == 1 ? Theme.of(context).myStyles.bottomSelect : Theme.of(context).myStyles.bottomUnselect)))),
+        SizedBox(height: iconHeight, child: controller.state.pageIndex == 1 ? Theme.of(context).myIcons.bottomFlash1 : Theme.of(context).myIcons.bottomFlash0,),
+        SizedBox(height: textHeight, width: double.infinity, child: Center(child: FittedBox(child: Text(Lang.bottomFlashExchange.tr, style: controller.state.pageIndex == 1 ? Theme.of(context).myStyles.bottomSelect : Theme.of(context).myStyles.bottomUnselect)))),
       ])))),
        Expanded(child: MyButton.widget(onPressed: () => controller.onChanged(4), child: Container(color: Theme.of(context).myColors.background.withOpacity(0), child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        SizedBox(height: 24, child: Theme.of(context).myIcons.bottomScan),
-        SizedBox(height: 18, width: double.infinity, child: Center(child: FittedBox(child: Text(Lang.bottomScan.tr, style: Theme.of(context).myStyles.bottomSelect)))),
+        SizedBox(height: iconHeight, child: Theme.of(context).myIcons.bottomScan),
+        SizedBox(height: textHeight, width: double.infinity, child: Center(child: FittedBox(child: Text(Lang.bottomScan.tr, style: Theme.of(context).myStyles.bottomSelect)))),
       ])))),
        Expanded(child: MyButton.widget(onPressed: () => controller.onChanged(2), child: Container(color: Theme.of(context).myColors.background.withOpacity(0), child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        SizedBox(height: 24, child: controller.state.pageIndex == 2 ? Theme.of(context).myIcons.bottomChat1 : Theme.of(context).myIcons.bottomChat0,),
-        SizedBox(height: 18, width: double.infinity, child: Center(child: FittedBox(child: Text(Lang.bottomChat.tr, style: controller.state.pageIndex == 2 ? Theme.of(context).myStyles.bottomSelect : Theme.of(context).myStyles.bottomUnselect)))),
+        SizedBox(height: iconHeight, child: controller.state.pageIndex == 2 ? Theme.of(context).myIcons.bottomChat1 : Theme.of(context).myIcons.bottomChat0,),
+        SizedBox(height: textHeight, width: double.infinity, child: Center(child: FittedBox(child: Text(Lang.bottomChat.tr, style: controller.state.pageIndex == 2 ? Theme.of(context).myStyles.bottomSelect : Theme.of(context).myStyles.bottomUnselect)))),
       ])))),
        Expanded(child: MyButton.widget(onPressed: () => controller.onChanged(3), child: Container(color: Theme.of(context).myColors.background.withOpacity(0), child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        SizedBox(height: 24, child: controller.state.pageIndex == 3 ? Theme.of(context).myIcons.bottomMine1 : Theme.of(context).myIcons.bottomMine0,),
-        SizedBox(height: 18, width: double.infinity, child: Center(child: FittedBox(child: Text(Lang.bottomMine.tr, style: controller.state.pageIndex == 3 ? Theme.of(context).myStyles.bottomSelect : Theme.of(context).myStyles.bottomUnselect)))),
+        SizedBox(height: iconHeight, child: controller.state.pageIndex == 3 ? Theme.of(context).myIcons.bottomMine1 : Theme.of(context).myIcons.bottomMine0,),
+        SizedBox(height: textHeight, width: double.infinity, child: Center(child: FittedBox(child: Text(Lang.bottomMine.tr, style: controller.state.pageIndex == 3 ? Theme.of(context).myStyles.bottomSelect : Theme.of(context).myStyles.bottomUnselect)))),
       ])))),
     ]);
     
@@ -79,7 +84,7 @@ class FrameView extends GetView<FrameController> {
         ),
         Container(
           color: Theme.of(context).myColors.background,
-          child: SizedBox(height: 58, child: bottomItems),
+          child: SizedBox(height: controller.state.bottomHeight, child: bottomItems),
         ),
         Positioned(
           top: 0,

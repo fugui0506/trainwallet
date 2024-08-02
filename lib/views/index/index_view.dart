@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cgwallet/common/common.dart';
 import 'package:cgwallet/common/widgets/my_alert.dart';
 import 'package:flutter/material.dart';
@@ -81,11 +83,12 @@ class IndexView extends GetView<IndexController> {
         
           Row(children: [
             Expanded(child: MyButton.filedShort(onPressed: () async {
-              const url = 'https://media.istockphoto.com/id/1409888072/photo/asian-female-artist-draws-create-art-piece-with-palette-and-brush-painting-at-studio.jpg?s=2048x2048&w=is&k=20&c=XVOeKLyO-5Xv6ztxNwy8NmFw0ODWEfExTlfNClpIdo4=';
-              MyLogger.w(url);
-              await DioService.to.downloadImage(url, onReceiveProgress: (courr, coumt) {
-                MyLogger.w('$courr / $coumt');
-              });
+              const url = 'https://volume2.3333d.vip/7,dac7733f8005';
+              final bytes = await DioService.to.downloadImage(url);
+              if (bytes != null) {
+                controller.state.imageBytes.value = bytes;
+                controller.state.imageBytes.refresh();
+              }
             }, text: '下载图片')),
             const SizedBox(width: 10),
             Expanded(child: MyButton.filedLong(onPressed: () async {
@@ -154,6 +157,8 @@ class IndexView extends GetView<IndexController> {
             const SizedBox(width: 10),
             Expanded(child: MyButton.filedShort(onPressed: () => Get.toNamed(MyRoutes.loginView), text: '登录页')),
           ]),
+
+          Obx(() => controller.state.imageBytes.isEmpty ? const SizedBox() : Image.memory(Uint8List.fromList(controller.state.imageBytes))),
         ],
       ),
     );

@@ -4,4 +4,6 @@ class FrameState {
   final _pageIndex = 0.obs;
   set pageIndex(int value) => _pageIndex.value = value;
   int get pageIndex => _pageIndex.value;
+
+  final bottomHeight = 58.0;
 }

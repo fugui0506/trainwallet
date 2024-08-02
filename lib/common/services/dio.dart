@@ -123,27 +123,33 @@ class DioService extends GetxService {
     }
   }
 
-  Future<void> downloadImage(String url, {
-    Function(bool success)? callBack,
-    void Function(int, int)? onReceiveProgress,
-  }) async {
+  Future<List<int>?> downloadImage(String url) async {
+    List<int>? data;
     try {
       final response = await dio.get(url,
         options: Options(responseType: ResponseType.bytes),
-        onReceiveProgress: onReceiveProgress,
+        onReceiveProgress: (courr, coumt) {
+          MyLogger.w('正在下载图片 --> $courr / $coumt', isNewline: false);
+          if (courr == coumt) {
+            MyLogger.w('图片下载成功');
+          }
+        },
       );
+      data = response.data;
+    } on DioException catch (e) {
+      MyLogger.dioErr('download', url, e);
+    }
+    return data;
+  }
 
-      final imageFile = await DeviceService.to.saveImageToTemp(response.data);
-
-      if (imageFile != null) {
-        final result = await DeviceService.to.saveImageToGallery(imageFile);
-        callBack?.call(result);
-      } else {
-        callBack?.call(false);
-      }
+  Future<bool> checkUrlIsValid(String url) async {
+    try {
+      final response = await dio.head(url);
+      // 如果响应状态码在200-299范围内，则表示链接有效
+      return response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300;
     } catch (e) {
-      MyLogger.w('图片下载出错 --> $e');
-      callBack?.call(false);
+      // 捕获任何错误，返回false表示链接无效
+      return false;
     }
   }
 
@@ -184,8 +190,8 @@ class DioService extends GetxService {
         final List<dynamic> baseUrls = json['api'];
         for (var element in baseUrls) {
           try {
-            final isWork = await dio.get('$element/health');
-            if (isWork.statusCode == 200) {
+            final isWork = await checkUrlIsValid(url);
+            if (isWork) {
               MyConfig.urls.baseUrl = element;
               MyLogger.w('检测到有效的 API 地址 --> $element');
               break;
@@ -200,10 +206,8 @@ class DioService extends GetxService {
         final List<dynamic> wss = json['ws'];
         for (var element in wss) {
           try {
-            final isWork = await dio.get(url.replaceFirst('ws', 'http'), 
-              options: Options(responseType: ResponseType.plain)
-            );
-            if (isWork.statusCode == 200) {
+            final isWork = await checkUrlIsValid(url.replaceFirst('ws', 'http'));
+            if (isWork) {
               MyConfig.urls.wsUrl = element;
               MyLogger.w('检测到有效的 ws 地址 --> $element');
               break;
@@ -218,8 +222,8 @@ class DioService extends GetxService {
         final List<dynamic> androidDownloads = List.from(json['android_download']);
         for (var element in androidDownloads) {
           try {
-            final isWork = await dio.get(element, options: Options(responseType: ResponseType.plain));
-            if (isWork.statusCode == 200) {
+            final isWork = await checkUrlIsValid(element);
+            if (isWork) {
               MyConfig.urls.downloadAndroidUrl = element;
               MyLogger.w('检测到有效的 Android 下载地址 --> $element');
               break;
@@ -234,8 +238,8 @@ class DioService extends GetxService {
         final List<dynamic> iosDownloads = json['ios_download'];
         for (var element in iosDownloads) {
           try {
-            final isWork = await dio.get(element, options: Options(responseType: ResponseType.plain));
-            if (isWork.statusCode == 200) {
+            final isWork = await checkUrlIsValid(element);
+            if (isWork) {
               MyConfig.urls.downloadIOSUrl = element;
               MyLogger.w('检测到有效的 IOS 下载地址 --> $element');
               break;

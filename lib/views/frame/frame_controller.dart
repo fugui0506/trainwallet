@@ -12,6 +12,7 @@ class FrameController extends GetxController {
   }
 
   void onChanged(int index) {
+    Get.focusScope?.unfocus();
     if (index == 4) {
       goScanView();
     } else {
