@@ -39,6 +39,8 @@ class MyIcons {
   MyAssets get homeSellOrders => const MyAssets(name: 'home_sell_orders', style: MyAssetStyle.svg);
   MyAssets get homeTransfer => const MyAssets(name: 'home_transfer', style: MyAssetStyle.svg);
   MyAssets get homeCopy => const MyAssets(name: 'copy', style: MyAssetStyle.svg);
+  MyAssets get homeAppBarBackground => const MyAssets(name: 'home_appbar_background', style: MyAssetStyle.png);
+  MyAssets get homeWalletAddressBackground => const MyAssets(name: 'home_wallet_address_background', style: MyAssetStyle.svg, width: double.infinity, height: double.infinity,);
 
   MyAssets get helpHot => const MyAssets(name: 'help_hot', style: MyAssetStyle.svg);
   MyAssets get helpNormal => const MyAssets(name: 'help_normal', style: MyAssetStyle.svg);

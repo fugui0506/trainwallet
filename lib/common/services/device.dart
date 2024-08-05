@@ -83,6 +83,8 @@ class DeviceService extends GetxService with WidgetsBindingObserver {
 
     // 获取包信息
     packageInfo = await PackageInfo.fromPlatform();
+    MyLogger.w('APP包信息 --> APP名称: ${packageInfo.appName}', isNewline: false);
+    MyLogger.w('APP包信息 --> 版本号: ${packageInfo.version}', isNewline: false);
 
     // 设置竖屏
     await MyTheme.setPreferredOrientations();

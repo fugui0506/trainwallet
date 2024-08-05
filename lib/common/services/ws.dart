@@ -48,7 +48,7 @@ class WebSocketService extends GetxService {
 
   // ws 重置到初始化状态
   void reset() {
-    if (UserService.to.userInfo.value.token.isEmpty) return;
+    if (UserController.to.userInfo.value.token.isEmpty) return;
     close().then((_) => _retryConnection());
   }
 
@@ -60,7 +60,7 @@ class WebSocketService extends GetxService {
       _webSocketChannel = IOWebSocketChannel.connect(
         Uri.parse(MyConfig.urls.wsUrl), // 替换为实际的 WebSocket URL
         headers: {
-          'x-token': UserService.to.userInfo.value.token, // 替换为实际的 token
+          'x-token': UserController.to.userInfo.value.token, // 替换为实际的 token
         },
         pingInterval: const Duration(seconds: 5),
         connectTimeout: const Duration(seconds: 10),
@@ -130,7 +130,7 @@ class WebSocketService extends GetxService {
           _retryConnection();
           return;
         }
-        if (UserService.to.userInfo.value.token.isEmpty) {
+        if (UserController.to.userInfo.value.token.isEmpty) {
           MyLogger.w('😭😭😭😭😭 未获取到 token -- ${DateTime.now()}', isNewline: false);
           _retryConnection();
           return;

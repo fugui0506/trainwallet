@@ -45,4 +45,18 @@ abstract class Lang {
   static const bottomChat = 'bottom_chat';
   static const bottomMine = 'bottom_mine';
 
+  // 首页
+  static const homeViewUid= 'home_view_uid';
+  static const homeViewBlance= 'home_view_blance';
+  static const homeViewSelling= 'home_view_selling';
+  static const homeViewLock= 'home_view_lock';
+  static const homeViewWalletAddress= 'home_view_wallet_address';
+  static const homeViewBuyCoin= 'home_view_buy_coin';
+  static const homeViewSellCoin= 'home_view_sell_coin';
+  static const homeViewTrastion= 'home_view_trastion';
+  static const homeViewBuyOrders= 'home_view_buy_orders';
+  static const homeViewSellOrders= 'home_view_sell_orders';
+  static const homeViewQuickBuyButton= 'home_view_quick_buy_button';
+  static const homeViewQuickBuyTitle= 'home_view_quick_buy_title';
+  static const homeViewQuickBuyContent= 'home_view_quick_buy_content';
 }

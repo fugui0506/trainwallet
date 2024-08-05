@@ -6,4 +6,6 @@ class IndexState {
   int get timer => _timer.value;
 
   final imageBytes = <int>[].obs;
+
+  final isMove = false.obs;
 }

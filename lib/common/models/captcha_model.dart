@@ -1,5 +1,4 @@
 import 'package:cgwallet/common/common.dart';
-import 'package:flutter/material.dart';
 
 class CaptchaModel {
   CaptchaModel({
@@ -14,15 +13,17 @@ class CaptchaModel {
   int captchaLength;
   bool openCaptcha;
 
-  static Future<CaptchaModel> get(BuildContext context) async {
-    var data = CaptchaModel.empty();
+  Future<void> update() async {
+    // 获取用户信息
     await DioService.to.get<CaptchaModel>(ApiPath.base.captcha,
-      onSuccess: (code, msg, results) {
-        data = results;
+      onSuccess: (code, msg, results) async {
+        captchaId = results.captchaId;
+        picPath = results.picPath;
+        captchaLength = results.captchaLength;
+        openCaptcha = results.openCaptcha;
       },
       onModel: (m) => CaptchaModel.fromJson(m),
     );
-    return data;
   }
 
   factory CaptchaModel.fromJson(Map<String, dynamic> json) => CaptchaModel(
@@ -42,7 +43,7 @@ class CaptchaModel {
   factory CaptchaModel.empty() => CaptchaModel(
     captchaId: '',
     picPath: '',
-    captchaLength: 0,
+    captchaLength: -1,
     openCaptcha: false,
   );
 }

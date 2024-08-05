@@ -89,7 +89,7 @@ class LoginView extends GetView<LoginController> {
     final inputRepassword = MyInput.password(context, controller.repasswordTextController, controller.repasswordFocusNode, Lang.inputRepasswordHintText.tr);
     final inputPhone = MyInput.phone(context, controller.phoneTextController, controller.phoneFocusNode);
     final inputPhoneCode = MyInput.phoneCode(context, controller.phoneCodeTextController, controller.phoneCodeFocusNode, controller.phoneTextController);
-    // final inputCaptcha = MyInput.captcha(context, controller.caputcharTextController, controller.caputcharFocusNode, controller.state.captchForPassword);
+    final inputCaptcha = MyInput.captcha(context, controller.caputcharTextController, controller.caputcharFocusNode, controller.state.captchForPassword);
 
     final loginForPassword = Padding(padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
       child: Column(children: [
@@ -98,8 +98,8 @@ class LoginView extends GetView<LoginController> {
         const SizedBox(height: 6),
         inputPassword,
         const SizedBox(height: 6),
-        // inputCaptcha,
-        // const SizedBox(height: 10),
+        inputCaptcha,
+        const SizedBox(height: 10),
         _buildRemenberAccountButtton(context),
         const SizedBox(height: 32),
         Obx(() => controller.state.isLoading  
@@ -198,7 +198,7 @@ class LoginView extends GetView<LoginController> {
       const SizedBox(width: 8),
       Obx(() => controller.state.isRemenberPassword ? Theme.of(context).myIcons.loginRemberAccount : Theme.of(context).myIcons.loginUnremberAccount),
       const SizedBox(width: 8),
-      Text(Lang.loginViewRemenberAccount.tr, style: Theme.of(context).myStyles.labelText)
+      Text(Lang.loginViewRemenberAccount.tr, style: Theme.of(context).myStyles.label)
     ]);
     return MyButton.widget(onPressed: controller.onRemenberAccount, child: child);
   }

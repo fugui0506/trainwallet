@@ -15,4 +15,6 @@ class _Base {
   final String register = '/base/register';
   // 忘记密码
   final String forgetPassword = '/base/forgetPassword';
+  // 获取用户信息
+  final String getUserInfo = '/base/getMemberInfo';
 }

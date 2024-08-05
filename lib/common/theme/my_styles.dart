@@ -9,7 +9,7 @@ class MyStyles {
   // 输入框文本的样式
   TextStyle get inputText => TextStyle(color: myColors.inputText, fontSize: 14);
   // 输入框文本的样式
-  TextStyle get inputErroeText => TextStyle(color: myColors.error, fontSize: 14);
+  TextStyle get inputErroe => TextStyle(color: myColors.error, fontSize: 14);
 
   // 登录页面Title
   TextStyle get loginTitleSelect => TextStyle(color: myColors.primary, fontSize: 16);
@@ -17,7 +17,9 @@ class MyStyles {
   TextStyle get loginTitleUnselect => TextStyle(color: myColors.primary, fontSize: 16);
 
   // 高度是0的Label样式
-  TextStyle get labelText => TextStyle(color: myColors.textDefault, fontSize: 14, height: 0);
+  TextStyle get label => TextStyle(color: myColors.textDefault, fontSize: 14, height: 0);
+  TextStyle get content => TextStyle(color: myColors.textDefault, fontSize: 14);
+
 
   // appBar的文字样式
   TextStyle get appBarTitle => TextStyle(color: myColors.onaAppBar, fontSize: 18);
@@ -31,6 +33,12 @@ class MyStyles {
 
   // snackBar 文字样式
   TextStyle get onSnackbar => TextStyle(color: myColors.background, fontSize: 14);
+
+  // 首页 AppBar 上面的文字
+  TextStyle get onHomeAppBarNormal => TextStyle(color: myColors.onPrimary, fontSize: 14, height: 0);
+  TextStyle get onHomeAppBarUID => TextStyle(color: myColors.onPrimary, fontSize: 16);
+  TextStyle get onHomeAppBarHeader => TextStyle(color: myColors.onPrimary, fontSize: 18, height: 0);
+  TextStyle get onHomeAppBarBigger => TextStyle(color: myColors.onPrimary, fontSize: 22, height: 0);
 
   // 按钮文字的样式
   TextStyle get buttonText => const TextStyle(fontSize: 14);

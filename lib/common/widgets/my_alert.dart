@@ -7,17 +7,16 @@ import 'package:get/get.dart';
 class MyAlert {
   static void snackbar(String message) {
     if (Get.isSnackbarOpen) return;
+    final messageBox = Center(child: MyCard.snackbar(
+      Text(message, style: Get.theme.myStyles.onSnackbar, textAlign: TextAlign.center),
+    ));
     Get.rawSnackbar(
-      messageText: Text(message, style: Get.theme.myStyles.onSnackbar, textAlign: TextAlign.center,),
+      messageText: messageBox,
       snackPosition: SnackPosition.TOP,
       borderRadius: 8,
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
       animationDuration: const Duration(milliseconds: 500),
       duration: const Duration(milliseconds: 2000),
-      // borderColor: Get.theme.myColors.primary.withOpacity(0.6),
-      // boxShadows: [BoxShadow(color: Get.theme.myColors.primary.withOpacity(0.6), blurRadius: 4, spreadRadius: 0)],
-      backgroundColor: Get.theme.myColors.onBackground.withOpacity(0.72)
+      backgroundColor: Colors.transparent,
     );
   }
 
@@ -65,7 +64,7 @@ class MyAlert {
                 if (title != null)
                   const SizedBox(height: 20),
                 if (message != null)
-                  Text(message, style: Theme.of(context).myStyles.labelText,),
+                  Text(message, style: Theme.of(context).myStyles.content,),
                 if (message != null)
                   const SizedBox(height: 20),
                 if (showCancelButton || showConfirmButton)

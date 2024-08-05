@@ -1,5 +1,6 @@
 import 'package:cgwallet/common/common.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MyCard extends StatelessWidget {
   const MyCard({
@@ -35,6 +36,21 @@ class MyCard extends StatelessWidget {
     width: 60,
     height: 60,
     borderRadius: BorderRadius.circular(10),
+    child: child,
+  );
+
+  factory MyCard.snackbar(Widget child) => MyCard(
+    color: Get.theme.myColors.onBackground.withOpacity(0.72),
+    padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+    borderRadius: BorderRadius.circular(8),
+    child: child,
+  );
+
+  factory MyCard.avatar(BuildContext context, double radius, {Widget? child}) => MyCard(
+    color: Theme.of(context).myColors.buttonDisable,
+    width: radius * 2,
+    height: radius * 2,
+    borderRadius: BorderRadius.circular(radius),
     child: child,
   );
 

@@ -70,6 +70,12 @@ dependencies:
   # 键盘隐藏
   flutter_keyboard_visibility: ^6.0.0
 
+  # 缓存
+  flutter_cache_manager: ^3.4.0
+
+  # 下拉刷新
+  pull_to_refresh: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

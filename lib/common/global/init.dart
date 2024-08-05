@@ -14,7 +14,7 @@ Future<void> init() async {
 
   // 导入用户控制器
   // user: 用户控制器
-  await Get.put(UserService()).initComplete;
+  await Get.put(UserController()).initComplete;
 
   // 导入全局控制器
   // DeviceService 设备相关的服务

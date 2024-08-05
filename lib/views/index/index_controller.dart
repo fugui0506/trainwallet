@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../../common/common.dart';
@@ -5,6 +6,8 @@ import 'index.dart';
 
 class IndexController extends GetxController {
   final state = IndexState();
+  final ScrollController scrollController = ScrollController();
+
 
   final title = 'Index';
   @override

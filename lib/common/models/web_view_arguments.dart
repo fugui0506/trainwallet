@@ -1,4 +1,3 @@
-// 返回数据格式化
 class WebViewArgumentsModel {
   WebViewArgumentsModel({
     this.title,

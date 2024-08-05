@@ -160,10 +160,14 @@ class MyInput extends StatelessWidget {
   ) {
     final loading = false.obs;
 
+    Future<void> getCaptcha() async {
+      await source.value.update();
+      source.update((val) { });
+    }
+
     void onLoading() async {
       loading.value = true;
-      // if (!focusNode.hasFocus) focusNode.requestFocus();
-      source.value = await CaptchaModel.get(context);
+      await getCaptcha();
       loading.value = false;
     }
 
@@ -384,7 +388,7 @@ class MyInput extends StatelessWidget {
           ),
         ),
         errorText: errorText, // Error message text
-        errorStyle: Theme.of(context).myStyles.inputErroeText,
+        errorStyle: Theme.of(context).myStyles.inputErroe,
       ),
       obscureText: obscureText,
       onTap: onTap,

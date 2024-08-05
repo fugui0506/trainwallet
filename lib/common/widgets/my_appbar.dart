@@ -16,6 +16,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? flexibleSpace;
   final TextStyle? titleTextStyle;
   final IconThemeData? iconTheme;
+  final PreferredSizeWidget? bottom;
 
   const MyAppBar({
     super.key,
@@ -32,6 +33,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.flexibleSpace,
     this.iconTheme,
     this.titleTextStyle,
+    this.bottom,
   });
 
   // 普通的 appbar
@@ -69,6 +71,19 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     actions: actions,
     titleTextStyle: Theme.of(context).myStyles.appBarTitle,
     iconTheme: Theme.of(context).myStyles.appBarIconThemeData,
+  );
+
+  // 首页的banner
+  factory MyAppBar.spacer({
+    Widget? title,
+    Widget? flexibleSpace,
+    PreferredSizeWidget? bottom,
+  }) => MyAppBar(
+    backgroundColor: Colors.transparent,
+    title: title,
+    titleSpacing: 0,
+    flexibleSpace: flexibleSpace,
+    bottom: bottom,
   );
 
   // scan 专用（白色）
@@ -120,9 +135,13 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: leading ?? leadingButton,
       title: title,
       actions: actions,
+      bottom: bottom,
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize {
+    final bottomHeight = bottom?.preferredSize.height ?? 0.0;
+    return Size.fromHeight(kToolbarHeight + bottomHeight);
+  }
 }

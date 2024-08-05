@@ -1,3 +1,5 @@
+import 'package:cgwallet/common/common.dart';
+
 class UserInfoModel {
   User user;
   String token;
@@ -7,7 +9,7 @@ class UserInfoModel {
   String frozenBalance;
   String lockBalance;
   String buyRate;
-  String? walletAddress;
+  String walletAddress;
 
   UserInfoModel({
     required this.user,
@@ -18,7 +20,7 @@ class UserInfoModel {
     required this.frozenBalance,
     required this.lockBalance,
     required this.buyRate,
-    this.walletAddress,
+    required this.walletAddress,
   });
 
   factory UserInfoModel.fromJson(Map<String, dynamic> json) => UserInfoModel(
@@ -36,7 +38,7 @@ class UserInfoModel {
   factory UserInfoModel.empty() => UserInfoModel(
     user: User.empty(),
     token: '',
-    expiresAt: 0,
+    expiresAt: -1,
     // ws: '',
     balance: '',
     frozenBalance: '',
@@ -56,6 +58,21 @@ class UserInfoModel {
     "buyRate": buyRate,
     "walletAddress": walletAddress,
   };
+
+  Future<void> update() async {
+    // 获取用户信息
+    await DioService.to.post<UserInfoModel>(ApiPath.base.getUserInfo,
+      onSuccess: (code, msg, results) async {
+        balance = results.balance;
+        lockBalance = results.lockBalance;
+        frozenBalance = results.frozenBalance;
+        user = results.user;
+        buyRate = results.buyRate;
+        expiresAt = results.expiresAt;
+      },
+      onModel: (m) => UserInfoModel.fromJson(m),
+    );
+  }
 }
 
 class User {
@@ -116,17 +133,17 @@ class User {
   });
 
   factory User.empty() => User(
-    updatedAt: 0,
-    deletedAt: 0,
-    enable: 0,
-    enableTransfer: 0,
-    isAuth: 0,
-    lastTime: 0,
+    updatedAt: -1,
+    deletedAt: -1,
+    enable: -1,
+    enableTransfer: -1,
+    isAuth: -1,
+    lastTime: -1,
     lastIp: '',
     totalBuyOrder: '',
     totalSaleOrder: '',
     totalSwap: '',
-    createdAt: 0,
+    createdAt: -1,
     createdTime: '',
     updatedTime: '',
     username: '',
@@ -140,7 +157,7 @@ class User {
     registerDeviceNo: '',
     loginDeviceNo: '',
     riskMessage: '',
-    id: 0,
+    id: -1,
     lastAt: '',
   );
 
@@ -201,17 +218,6 @@ class User {
     "loginDeviceNo": loginDeviceNo,
     "riskMessage": riskMessage,
   };
-
-
-
-  String maskPhoneNumber() {
-    if (phone.length == 11) {
-      String maskedNumber = phone.replaceRange(3, 7, '****');
-      return maskedNumber;
-    } else {
-      return '137****9088';
-    }
-  }
 }
 
 class AvatarModel {
@@ -228,5 +234,5 @@ class AvatarModel {
     avatarUrl: json['avatar_url'],
   );
 
-  factory AvatarModel.empty() => AvatarModel(id: 0, avatarUrl: '');
+  factory AvatarModel.empty() => AvatarModel(id: -1, avatarUrl: '');
 }

@@ -79,73 +79,44 @@ class LoginController extends GetxController {
     reset();
   }
 
-  void onLoginForPassword() async {
-    Get.focusScope?.unfocus();
+  void onLoding(String value) {
+    state.isButtonDisable = true;
     state.isLoading = true;
+    MyAlert.block();
+    state.validate = value;
+  }
+
+  void check(void Function() future) {
+    Get.focusScope?.unfocus();
+    state.isButtonDisable = true;
     showCaptcha(
       onSuccess: (value) async {
-        MyAlert.block();
-        state.validate = value;
-        await loginForPassword();
+        onLoding(value);
+        future.call();
       },
       onError: () {
-        state.isLoading = false;
+        state.isButtonDisable = false;
       },
       onClose: () {
-        state.isLoading = false;
+        state.isButtonDisable = false;
       },
     );
+  }
+
+  void onLoginForPassword() {
+    check(loginForPassword);
   }
 
   void onRegister() {
-    Get.focusScope?.unfocus();
-    state.isLoading = true;
-    showCaptcha(
-      onSuccess: (value) async {
-        MyAlert.block();
-        await register();
-      },
-      onError: () {
-        state.isLoading = false;
-      },
-      onClose: () {
-        state.isLoading = false;
-      },
-    );
+    check(register);
   }
 
-  void onForgotPassword() async {
-    Get.focusScope?.unfocus();
-    state.isLoading = true;
-    showCaptcha(
-      onSuccess: (value) async {
-        MyAlert.block();
-        await forgotPassword();
-      },
-      onError: () {
-        state.isLoading = false;
-      },
-      onClose: () {
-        state.isLoading = false;
-      },
-    );
+  void onForgotPassword() {
+    check(forgotPassword);
   }
 
   void onLoginForPhoneCode() {
-    Get.focusScope?.unfocus();
-    state.isLoading = true;
-    showCaptcha(
-      onSuccess: (value) async {
-        MyAlert.block();
-        await loginForPhoneCode();
-      },
-      onError: () {
-        state.isLoading = false;
-      },
-      onClose: () {
-        state.isLoading = false;
-      },
-    );
+    check(loginForPhoneCode);
   }
 
   void onRemenberAccount() {
@@ -212,32 +183,32 @@ class LoginController extends GetxController {
 
   // 检查是否被风控
   Future<void> checkRiskControlled() async {
-    if (UserService.to.userInfo.value.user.riskMessage.isNotEmpty && UserService.to.userInfo.value.user.enable == 2 && UserService.to.userInfo.value.user.isAuth != 3) {
-      Get.back();
-      final result = await Get.toNamed(MyRoutes.faceVerifiedView);
+    if (UserController.to.userInfo.value.user.riskMessage.isNotEmpty && UserController.to.userInfo.value.user.enable == 2 && UserController.to.userInfo.value.user.isAuth != 3) {
+      final result = await Get.offNamed(MyRoutes.faceVerifiedView);
       if (result == null) {
         state.isLoading = false;
         return;
       }
     }
-
-    Get.back();
+    
     Get.offAllNamed(MyRoutes.frameView);
     
-    if (UserService.to.userInfo.value.user.riskMessage.isNotEmpty && UserService.to.userInfo.value.user.isAuth == 3) {
+    if (UserController.to.userInfo.value.user.riskMessage.isNotEmpty && UserController.to.userInfo.value.user.isAuth == 3) {
       MyAlert.snackbar('账号无法完成人脸识别,请联系客服');
     }
   }
 
   // 设置用户信息：登录成功后
   void setUserInfo(UserInfoModel data) {
-    UserService.to.userInfo.value = data;
-    UserService.to.userInfo.update((val) {});
-    UserService.to.lastIp = data.user.lastIp;
-    UserService.to.lastLoginTime = data.user.lastAt;
+    UserController.to.userInfo.value = data;
+    UserController.to.userInfo.update((val) {});
+    UserController.to.lastIp = data.user.lastIp;
+    UserController.to.lastLoginTime = data.user.lastAt;
   }
 
   Future<void> loginForPassword() async {
+    state.isLoading = true;
+
     await DioService.to.post<UserInfoModel>(ApiPath.base.accountLogin, 
       onSuccess: (code, msg, data) async {
         setUserInfo(data);
@@ -268,6 +239,8 @@ class LoginController extends GetxController {
   }
 
   Future<void> register() async {
+    state.isLoading = true;
+
     await DioService.to.post<UserInfoModel>(ApiPath.base.register, 
       onSuccess: (code, msg, data) async {
         setUserInfo(data);
@@ -291,6 +264,8 @@ class LoginController extends GetxController {
   }
 
   Future<void> forgotPassword() async {
+    state.isLoading = true;
+
     await DioService.to.post(ApiPath.base.forgetPassword, 
       onSuccess: (code, msg, data) async {
         goLogin();
@@ -310,6 +285,8 @@ class LoginController extends GetxController {
   }
 
   Future<void> loginForPhoneCode() async {
+    state.isLoading = true;
+
     await DioService.to.post<UserInfoModel>(ApiPath.base.phoneLogin, 
       onSuccess: (code, msg, data) async {
         setUserInfo(data);

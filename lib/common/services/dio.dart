@@ -33,8 +33,8 @@ class DioService extends GetxService {
     return InterceptorsWrapper(
       onRequest: (options, handler) {
         options.headers.addAll({
-          if (UserService.to.userInfo.value.token.isNotEmpty)
-            'x-token': UserService.to.userInfo.value.token,
+          if (UserController.to.userInfo.value.token.isNotEmpty)
+            'x-token': UserController.to.userInfo.value.token,
           'x-timestamp': DateTime.now().microsecondsSinceEpoch.toString(),
           'x-device': DeviceService.to.deviceId,
         });
@@ -65,7 +65,7 @@ class DioService extends GetxService {
     Map<String, dynamic>? data,
     CancelToken? cancelToken,
     void Function(int, int)? onReceiveProgress,
-    T Function(Map<String, dynamic>)? onModel,
+    T Function(dynamic)? onModel,
     void Function()? onError,
   }) async {
     try {
@@ -97,7 +97,7 @@ class DioService extends GetxService {
     Function(int code, String msg, T data)? onSuccess,
     Map<String, dynamic>? data,
     CancelToken? cancelToken,
-    T Function(Map<String, dynamic>)? onModel,
+    T Function(dynamic)? onModel,
     void Function()? onError,
   }) async {
     try {

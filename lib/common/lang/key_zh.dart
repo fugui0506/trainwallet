@@ -45,4 +45,18 @@ const Map<String, String> zh = {
   Lang.bottomMine: '我的',
   Lang.bottomScan: '扫一扫',
 
+  // 首页
+  Lang.homeViewUid: 'UID:',
+  Lang.homeViewBlance: '账户余额(CGB)',
+  Lang.homeViewSelling: '挂单中(CGB)',
+  Lang.homeViewLock: '不可售(CGB)',
+  Lang.homeViewWalletAddress: '钱包地址',
+  Lang.homeViewBuyCoin: '买币',
+  Lang.homeViewSellCoin: '卖币',
+  Lang.homeViewTrastion: '转账',
+  Lang.homeViewBuyOrders: '购买订单',
+  Lang.homeViewSellOrders: '出售订单',
+  Lang.homeViewQuickBuyButton: '快捷买币 GO',
+  Lang.homeViewQuickBuyTitle: '用CGpay交易不受银行风控影响',
+  Lang.homeViewQuickBuyContent: 'CGpay锚定人民币 1:1 兑换',
 };

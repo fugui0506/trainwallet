@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:cgwallet/common/common.dart';
 import 'package:cgwallet/common/widgets/my_alert.dart';
 import 'package:flutter/material.dart';
@@ -50,8 +48,8 @@ class IndexView extends GetView<IndexController> {
 
               await DioService.to.post<UserInfoModel>(ApiPath.base.accountLogin, 
                 onSuccess: (code, msg, data) {
-                  UserService.to.userInfo.value = data;
-                  UserService.to.userInfo.update((val) {});
+                  UserController.to.userInfo.value = data;
+                  UserController.to.userInfo.update((val) {});
                 },
                 onModel: (json) => UserInfoModel.fromJson(json),
                 data: {
@@ -67,7 +65,7 @@ class IndexView extends GetView<IndexController> {
               MyAudio.to.play(MyAudioPath.click);
               await DioService.to.post(ApiPath.base.logout,
                 onSuccess: (code, msg, data) {
-                  UserService.to.userInfo.update((val) {
+                  UserController.to.userInfo.update((val) {
                     val!.token = '';
                   });
                 },
@@ -151,14 +149,16 @@ class IndexView extends GetView<IndexController> {
           ]),
 
           Row(children: [
-            Expanded(child: MyButton.filedShort(onPressed: () => Get.toNamed(MyRoutes.loginView), text: '登录页')),
+            Expanded(child: MyButton.filedShort(onPressed: () => Get.offAllNamed(MyRoutes.loginView), text: '登录页')),
             const SizedBox(width: 10),
-            Expanded(child: MyButton.filedShort(onPressed: () => Get.toNamed(MyRoutes.frameView), text: '首页')),
+            Expanded(child: MyButton.filedShort(onPressed: () => Get.offAllNamed(MyRoutes.frameView), text: '首页')),
             const SizedBox(width: 10),
-            Expanded(child: MyButton.filedShort(onPressed: () => Get.toNamed(MyRoutes.loginView), text: '登录页')),
+            Expanded(child: MyButton.filedShort(onPressed: () {}, text: '登录页')),
           ]),
 
-          Obx(() => controller.state.imageBytes.isEmpty ? const SizedBox() : Image.memory(Uint8List.fromList(controller.state.imageBytes))),
+          // Obx(() => controller.state.imageBytes.isEmpty ? const SizedBox() : Image.memory(Uint8List.fromList(controller.state.imageBytes))),
+          // MyImage(imageUrl: 'https://volume2.3333d.vip/7,dac7733f8005')
+
         ],
       ),
     );
