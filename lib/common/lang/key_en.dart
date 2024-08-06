@@ -37,6 +37,7 @@ const Map<String, String> en = {
   Lang.loginViewLoginForCode: 'Login for code',
   Lang.loginViewForgotPassword: 'Forgot password',
   Lang.loginViewGetbackPassword: 'Confirm',
+  Lang.loginViewCheckError: 'The account cannot complete face recognition, please contact customer service',
 
   // 底部导航栏
   Lang.bottomChat: 'Chat',

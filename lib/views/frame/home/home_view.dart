@@ -1,8 +1,4 @@
 import 'package:cgwallet/common/common.dart';
-import 'package:cgwallet/common/widgets/my_card.dart';
-import 'package:cgwallet/common/widgets/my_image.dart';
-import 'package:cgwallet/common/widgets/my_marquee.dart';
-import 'package:cgwallet/common/widgets/my_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,7 +43,27 @@ class HomeView extends StatelessWidget {
       controller: controller.refreshController, 
       children: [
         _buildMarquee(context, controller),
+        const SizedBox(height: 4),
+        _buildCarousel(context, controller),
       ]
+    );
+  }
+
+  Widget _buildCarousel(BuildContext context, HomeController controller) {
+    return MyCard.carousel(context, child: Obx(() => controller.state.carouselList.value.list.isEmpty
+      ? const SizedBox()
+      : MyCarousel(
+          children: controller.state.carouselList.value.list.map((e) => MyButton.widget(
+            onPressed: e.link.isEmpty ? null : () {
+
+            }, 
+            child: MyImage(imageUrl: e.pictureUrl)
+          )).toList(), 
+          onChanged: (index) {
+
+          }
+        )
+      )
     );
   }
 
@@ -57,7 +73,7 @@ class HomeView extends StatelessWidget {
       const SizedBox(width: 8),
       Expanded(child:  Obx(() => controller.state.marqueeList.value.list.isEmpty
         ? const SizedBox()
-        : MyMarquee(marqueeList: controller.state.marqueeList.value)
+        : MyMarquee(contentList: controller.state.marqueeList.value.list.map((e) => e.content).toList())
       )),
     ]);
   }

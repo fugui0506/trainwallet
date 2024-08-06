@@ -1,5 +1,4 @@
 import 'package:cgwallet/common/common.dart';
-import 'package:cgwallet/common/widgets/my_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 

@@ -5,4 +5,6 @@ class _Me {
   final String getUnreadCount = '/me/getUnreadCount';
   // 获取走马灯信息
   final String getMarquee = '/me/marquee';
+  // 获取Carousels
+  final String getCarousel = '/me/getCarousel';
 }

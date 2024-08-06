@@ -1,6 +1,4 @@
-// import 'package:captcha_plugin_flutter/captcha_plugin_flutter.dart';
 import 'package:captcha_plugin_flutter/captcha_plugin_flutter.dart';
-import 'package:cgwallet/common/widgets/my_alert.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -91,8 +89,10 @@ class LoginController extends GetxController {
     state.isButtonDisable = true;
     showCaptcha(
       onSuccess: (value) async {
-        onLoding(value);
-        future.call();
+        if (value.isNotEmpty) {
+          onLoding(value);
+          future.call();
+        }
       },
       onError: () {
         state.isButtonDisable = false;
@@ -194,7 +194,7 @@ class LoginController extends GetxController {
     Get.offAllNamed(MyRoutes.frameView);
     
     if (UserController.to.userInfo.value.user.riskMessage.isNotEmpty && UserController.to.userInfo.value.user.isAuth == 3) {
-      MyAlert.snackbar('账号无法完成人脸识别,请联系客服');
+      MyAlert.snackbar(Lang.loginViewCheckError.tr);
     }
   }
 
@@ -310,21 +310,21 @@ class LoginController extends GetxController {
   void showCaptcha({void Function(String)? onSuccess, void Function()? onError, void Function()? onClose}) {
     CaptchaPluginConfig styleConfig = CaptchaPluginConfig(
       radius: 10,
-      capBarTextColor:"#25D4D0",
+      capBarTextColor: "#25D4D0",
       capBarTextSize: 18,
-      capBarTextWeight:"bold",
-      borderColor:"#25D4D0",
+      capBarTextWeight: "bold",
+      borderColor: "#25D4D0",
       borderRadius:10,
-      backgroundMoving:"#DC143C",
+      backgroundMoving: "#DC143C",
       executeBorderRadius:10,
-      executeBackground:"#DC143C",
-      capBarTextAlign:"center",
-      capPaddingTop:10,
-      capPaddingRight:10,
-      capPaddingBottom:10,
-      capPaddingLeft:10,
-      paddingTop:15,
-      paddingBottom:15
+      executeBackground: "#DC143C",
+      capBarTextAlign: "center",
+      capPaddingTop: 10,
+      capPaddingRight: 10,
+      capPaddingBottom: 10,
+      capPaddingLeft: 10,
+      paddingTop: 15,
+      paddingBottom: 15
     );
     String languageType = 'zh-CN';
     if (Get.locale != MyLang.defaultLocale) {

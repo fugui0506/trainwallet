@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:cgwallet/common/widgets/my_alert.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import '../common.dart';

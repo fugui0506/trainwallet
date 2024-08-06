@@ -37,6 +37,7 @@ const Map<String, String> zh = {
   Lang.loginViewLoginForCode: '验证码登录',
   Lang.loginViewForgotPassword: '忘记密码',
   Lang.loginViewGetbackPassword: '确定',
+  Lang.loginViewCheckError: '账号无法完成人脸识别,请联系客服',
 
   // 底部导航栏
   Lang.bottomChat: '会话',

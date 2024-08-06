@@ -2,8 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cgwallet/common/common.dart';
-import 'package:cgwallet/common/widgets/my_alert.dart';
-import 'package:cgwallet/common/widgets/my_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

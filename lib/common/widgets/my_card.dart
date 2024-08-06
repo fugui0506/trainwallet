@@ -12,6 +12,8 @@ class MyCard extends StatelessWidget {
     this.child,
     this.padding,
     this.margin,
+    this.boxShadow,
+    this.border,
   });
 
   final Color? color;
@@ -21,7 +23,8 @@ class MyCard extends StatelessWidget {
   final Widget? child;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
-
+  final List<BoxShadow>? boxShadow;
+  final BoxBorder? border;
 
   factory MyCard.login(BuildContext context, Widget child) => MyCard(
     color: Theme.of(context).myColors.cardBackground,
@@ -54,6 +57,16 @@ class MyCard extends StatelessWidget {
     child: child,
   );
 
+  factory MyCard.carousel(BuildContext context, {Widget? child}) => MyCard(
+    color: Theme.of(context).myColors.cardBackground,
+    width: double.infinity,
+    height: (Get.width - 32) * 120 / 360,
+    borderRadius: BorderRadius.circular(10),
+    border: Border.all(width: 1, color: Colors.white),
+    boxShadow: [BoxShadow(blurRadius: 8,color: Colors.black.withOpacity(0.08))], 
+    child: child,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -65,6 +78,8 @@ class MyCard extends StatelessWidget {
         color: color,
         borderRadius: borderRadius,
         shape: BoxShape.rectangle,
+        boxShadow: boxShadow,
+        border: border,
       ),
       clipBehavior: Clip.antiAlias,
       child: child,

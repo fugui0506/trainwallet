@@ -37,6 +37,7 @@ abstract class Lang {
   static const loginViewLoginForCode = 'login_view_login_for_code';
   static const loginViewForgotPassword = 'login_view_forget_password';
   static const loginViewGetbackPassword = 'login_view_get_back_password';
+  static const loginViewCheckError = 'login_view_check_error';
 
   // 主页面
   static const bottomHome = 'bottom_home';

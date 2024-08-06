@@ -1,5 +1,4 @@
 import 'package:cgwallet/common/common.dart';
-import 'package:cgwallet/common/widgets/my_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -155,6 +154,37 @@ class IndexView extends GetView<IndexController> {
             const SizedBox(width: 10),
             Expanded(child: MyButton.filedShort(onPressed: () {}, text: '登录页')),
           ]),
+
+          Container(width: double.infinity, height: 30, color: Colors.red, child: LayoutBuilder(builder: (context, constraints) {
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              controller: controller.scrollController,
+              child: Row(children: [
+                Container(width: constraints.maxWidth, height: 40, color: Colors.black),
+                Obx(() => Text(controller.state.zoumadeng.value)),
+                Container(width: constraints.maxWidth, height: 40, color: Colors.blue),
+              ]),
+            );
+          })),
+
+          // MyButton.filedLong(onPressed: () {
+          //   controller.state.zoumadeng.value = '1111';
+          //   controller.scrollController.animateTo(
+          //     controller.scrollController.position.maxScrollExtent,
+          //     duration: Duration(seconds: (controller.scrollController.position.maxScrollExtent * 4) ~/ 360), // 动画持续时间
+          //     curve: Curves.linear, // 动
+          //   ).then((value) => print('done'));
+          // }, text: 'text'),
+
+          // MyButton.filedLong(onPressed: () {
+          //   controller.state.zoumadeng.value = '3123131231312312312312312312312312312312312312313123asf就卡上打飞机阿斯顿啊舒服的啊谁来打飞机啦睡觉地方阿斯顿发拉萨到风口浪尖啊谁离开的风景阿莱克斯江东父老看啊是江东父老看就啊谁离开的风景阿里斯顿减肥拉屎的肌肤拉萨的肌肤了---- END';
+
+          //   controller.scrollController.animateTo(
+          //     controller.scrollController.position.maxScrollExtent,
+          //     duration: Duration(seconds: (controller.scrollController.position.maxScrollExtent * 4) ~/ 360), // 动画持续时间
+          //     curve: Curves.linear, // 动
+          //   ).then((value) => print('done'));
+          // }, text: 'text')
 
           // Obx(() => controller.state.imageBytes.isEmpty ? const SizedBox() : Image.memory(Uint8List.fromList(controller.state.imageBytes))),
           // MyImage(imageUrl: 'https://volume2.3333d.vip/7,dac7733f8005')

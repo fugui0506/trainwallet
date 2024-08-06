@@ -13,8 +13,13 @@ class HomeController extends GetxController {
   void onReady() async {
     super.onReady();
     await Future.delayed(MyConfig.app.timePageTransition);
+    await getHomeData();
+  }
+
+  Future<void> getHomeData() async {
     await getUnReadCount();
     await getMarqueeList();
+    await getCarouselList();
   }
 
   void copyUserId() {
@@ -44,5 +49,10 @@ class HomeController extends GetxController {
   Future<void> getMarqueeList() async {
     await state.marqueeList.value.update();
     state.marqueeList.update((val) {});
+  }
+
+  Future<void> getCarouselList() async {
+    await state.carouselList.value.update();
+    state.carouselList.update((val) {});
   }
 }

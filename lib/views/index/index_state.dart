@@ -8,4 +8,6 @@ class IndexState {
   final imageBytes = <int>[].obs;
 
   final isMove = false.obs;
+
+  final zoumadeng = ''.obs;
 }

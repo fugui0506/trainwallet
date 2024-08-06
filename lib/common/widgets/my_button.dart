@@ -58,10 +58,10 @@ class MyButton extends StatelessWidget {
   );
 
   // 填充颜色的长按钮
-  factory MyButton.loading(BuildContext context) => MyButton(
+  factory MyButton.loading(BuildContext context) => const MyButton(
     myButtonStyle: MyButtonStyle.filledButtonLong,
     onPressed: null,
-    child: CupertinoActivityIndicator(color: Theme.of(context).myColors.onButtonDisable,),
+    child: CupertinoActivityIndicator(),
   );
 
   // 填充颜色的短按钮

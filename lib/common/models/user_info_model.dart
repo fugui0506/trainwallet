@@ -40,11 +40,11 @@ class UserInfoModel {
     token: '',
     expiresAt: -1,
     // ws: '',
-    balance: '',
-    frozenBalance: '',
-    lockBalance: '',
+    balance: '0.00',
+    frozenBalance: '0.00',
+    lockBalance: '0.00',
     buyRate: '',
-    walletAddress: '',
+    walletAddress: '0000000000000000',
   );
 
   Map<String, dynamic> toJson() => {
