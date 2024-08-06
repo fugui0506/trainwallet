@@ -45,6 +45,9 @@ class HomeView extends StatelessWidget {
         _buildMarquee(context, controller),
         const SizedBox(height: 4),
         _buildCarousel(context, controller),
+        MyButton.filedLong(onPressed: () {
+          controller.update();
+        }, text: 'text')
       ]
     );
   }
@@ -55,13 +58,12 @@ class HomeView extends StatelessWidget {
       : MyCarousel(
           children: controller.state.carouselList.value.list.map((e) => MyButton.widget(
             onPressed: e.link.isEmpty ? null : () {
-
+              // 这里是图片里的链接
+              final arguments = WebViewArgumentsModel(title: e.name, url: e.link);
+              Get.toNamed(MyRoutes.webView, arguments: arguments);
             }, 
             child: MyImage(imageUrl: e.pictureUrl)
-          )).toList(), 
-          onChanged: (index) {
-
-          }
+          )).toList()
         )
       )
     );
