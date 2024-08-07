@@ -26,7 +26,7 @@ class MyCard extends StatelessWidget {
   final List<BoxShadow>? boxShadow;
   final BoxBorder? border;
 
-  factory MyCard.login(BuildContext context, Widget child) => MyCard(
+  factory MyCard.login({required BuildContext context, Widget? child}) => MyCard(
     color: Theme.of(context).myColors.cardBackground,
     width: double.infinity,
     borderRadius: BorderRadius.circular(20),
@@ -34,7 +34,7 @@ class MyCard extends StatelessWidget {
     child: child,
   );
 
-  factory MyCard.loading(BuildContext context, Widget child) => MyCard(
+  factory MyCard.loading({required BuildContext context, Widget? child}) => MyCard(
     color: Theme.of(context).myColors.primary,
     width: 60,
     height: 60,
@@ -42,28 +42,43 @@ class MyCard extends StatelessWidget {
     child: child,
   );
 
-  factory MyCard.snackbar(Widget child) => MyCard(
+  factory MyCard.snackbar(String message) => MyCard(
     color: Get.theme.myColors.onBackground.withOpacity(0.72),
     padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
     borderRadius: BorderRadius.circular(8),
-    child: child,
+    child: Text(message, style: Get.theme.myStyles.onSnackbar, textAlign: TextAlign.center),
   );
 
-  factory MyCard.avatar(BuildContext context, double radius, {Widget? child}) => MyCard(
-    color: Theme.of(context).myColors.buttonDisable,
+  factory MyCard.avatar({required BuildContext context, required double radius, Widget? child, Color? color}) => MyCard(
+    color: color ?? Theme.of(context).myColors.buttonDisable,
     width: radius * 2,
     height: radius * 2,
     borderRadius: BorderRadius.circular(radius),
     child: child,
   );
 
-  factory MyCard.carousel(BuildContext context, {Widget? child}) => MyCard(
+  factory MyCard.carousel({required BuildContext context, Widget? child}) => MyCard(
     color: Theme.of(context).myColors.cardBackground,
     width: double.infinity,
     height: (Get.width - 32) * 120 / 360,
     borderRadius: BorderRadius.circular(10),
     border: Border.all(width: 1, color: Colors.white),
     boxShadow: [BoxShadow(blurRadius: 8,color: Colors.black.withOpacity(0.08))], 
+    child: child,
+  );
+
+  factory MyCard.normal({required BuildContext context, Widget? child, EdgeInsetsGeometry? padding}) => MyCard(
+    color: Theme.of(context).myColors.cardBackground,
+    borderRadius: BorderRadius.circular(10),
+    padding: padding,
+    child: child,
+  );
+
+  factory MyCard.faq({required BuildContext context, Widget? child, EdgeInsetsGeometry? padding, EdgeInsetsGeometry? margin,}) => MyCard(
+    color: Theme.of(context).myColors.faqBackground,
+    borderRadius: BorderRadius.circular(10),
+    padding: padding,
+    margin: margin,
     child: child,
   );
 

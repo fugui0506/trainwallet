@@ -42,7 +42,7 @@ class FrameView extends GetView<FrameController> {
     final floatButton = Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Theme.of(context).myColors.background,
+        color: Theme.of(context).myColors.bottomNavigationBackground,
       ),
       child: MyButton.widget(onPressed: controller.goScanView, child: Column(children: [
         MyButton.icon(onPressed: controller.goScanView, icon: Theme.of(context).myIcons.bottomScan),
@@ -80,10 +80,10 @@ class FrameView extends GetView<FrameController> {
       children: [
         const SizedBox(
           width: double.infinity,
-          height: 80,
+          height: 76,
         ),
         Container(
-          color: Theme.of(context).myColors.background,
+          color: Theme.of(context).myColors.bottomNavigationBackground,
           child: SizedBox(height: controller.state.bottomHeight, child: bottomItems),
         ),
         Positioned(
@@ -94,8 +94,8 @@ class FrameView extends GetView<FrameController> {
     );
 
     final bottomSafeSpace = Container(
-      color: Theme.of(context).myColors.background, 
-      child: SafeArea(top: false,child: Container(color: Theme.of(context).myColors.background))
+      color: Theme.of(context).myColors.bottomNavigationBackground, 
+      child: SafeArea(top: false, child: Container(color: Theme.of(context).myColors.bottomNavigationBackground))
     );
 
     return Column(

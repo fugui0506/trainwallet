@@ -15,14 +15,16 @@ class MyIcons {
 
   MyAssets get loginTitleBackgroundLeft => const MyAssets(name: 'login_title_background_left', style: MyAssetStyle.svg);
   MyAssets get loginTitleBackgroundRight => const MyAssets(name: 'login_title_background_right', style: MyAssetStyle.svg);
-  MyAssets get loginTitleSelect => MyAssets(name: '${Get.isDarkMode ? 'dark' : 'light'}/login_title_select', style: MyAssetStyle.png, width: 60,);
+  MyAssets get loginTitleSelect => MyAssets(name: '${Get.isDarkMode ? 'dark' : 'light'}/login_title_select', style: MyAssetStyle.png, width: 60);
   MyAssets get loginRemberAccount => const MyAssets(name: 'single_checked', style: MyAssetStyle.svg);
   MyAssets get loginUnremberAccount => const MyAssets(name: 'single_uncheck', style: MyAssetStyle.svg);
 
   MyAssets get bottomChat0 => MyAssets(name: 'bottom_chat_0', style: MyAssetStyle.svg, color: myColors.textBottomUnselect,);
-  MyAssets get bottomChat1 => const MyAssets(name: 'bottom_chat_1', style: MyAssetStyle.svg);
+  // MyAssets get bottomChat1 => const MyAssets(name: 'bottom_chat_1', style: MyAssetStyle.svg);
+  MyAssets get bottomChat1 => MyAssets(name: '${Get.isDarkMode ? 'dark' : 'light'}/bottom_chat_1', style: MyAssetStyle.svg);
   MyAssets get bottomFlash0 => MyAssets(name: 'bottom_flash_0', style: MyAssetStyle.svg, color: myColors.textBottomUnselect,);
-  MyAssets get bottomFlash1 => const MyAssets(name: 'bottom_flash_1', style: MyAssetStyle.svg);
+  // MyAssets get bottomFlash1 => const MyAssets(name: 'bottom_flash_1', style: MyAssetStyle.svg);
+  MyAssets get bottomFlash1 => MyAssets(name: '${Get.isDarkMode ? 'dark' : 'light'}/bottom_flash_1', style: MyAssetStyle.svg);
   MyAssets get bottomHome0 => MyAssets(name: 'bottom_home_0', style: MyAssetStyle.svg, color: myColors.textBottomUnselect,);
   MyAssets get bottomHome1 => const MyAssets(name: 'bottom_home_1', style: MyAssetStyle.svg);
   MyAssets get bottomMine0 => MyAssets(name: 'bottom_mine_0', style: MyAssetStyle.svg, color: myColors.textBottomUnselect,);

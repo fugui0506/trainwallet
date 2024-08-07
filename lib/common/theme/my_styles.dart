@@ -20,6 +20,10 @@ class MyStyles {
   TextStyle get label => TextStyle(color: myColors.textDefault, fontSize: 14, height: 0);
   TextStyle get content => TextStyle(color: myColors.textDefault, fontSize: 14);
 
+  // faq 标题
+  TextStyle get faqTitle => TextStyle(color: myColors.textDefault, fontSize: 16, height: 0);
+  TextStyle get faqViewTitle => TextStyle(color: myColors.primary, fontSize: 18, height: 0);
+
 
   // appBar的文字样式
   TextStyle get appBarTitle => TextStyle(color: myColors.onaAppBar, fontSize: 18);
@@ -39,6 +43,9 @@ class MyStyles {
   TextStyle get onHomeAppBarUID => TextStyle(color: myColors.onPrimary, fontSize: 16);
   TextStyle get onHomeAppBarHeader => TextStyle(color: myColors.onPrimary, fontSize: 18, height: 0);
   TextStyle get onHomeAppBarBigger => TextStyle(color: myColors.onPrimary, fontSize: 22, height: 0);
+  TextStyle get homeQuickBuyTitle => TextStyle(color: myColors.primary, fontSize: 18, height: 0);
+
+  TextStyle get onButton => TextStyle(color: myColors.onPrimary, fontSize: 14);
 
   // 按钮文字的样式
   TextStyle get buttonText => const TextStyle(fontSize: 14);

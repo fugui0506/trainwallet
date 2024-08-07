@@ -23,11 +23,12 @@ class MyColors {
   Color get onSecondary => const Color(0xFFFFFFFF);
 
   // 卡片背景颜色
-  Color get cardBackground => Get.isDarkMode ? const Color(0xFF1F1F20) : const Color(0xFFFFFFFF);
+  Color get cardBackground => Get.isDarkMode ? const Color(0xFF3C3C40) : const Color(0xFFFFFFFF);
   // 卡片上的文字颜色
   Color get onCardBackground => Get.isDarkMode ? const Color(0xFFF5F8FC) : const Color(0xFF333334);
+  // faq卡片颜色
+  Color get faqBackground => Get.isDarkMode ? const Color(0xFF333334) : const Color(0xFFF3F4F7);
 
-  
   // 输入框边框的颜色
   Color get inputBorder => Get.isDarkMode ? const Color(0xFF434345) : const Color(0xFFD1D1D1);
   // 输入框左侧图标的颜色
@@ -48,7 +49,7 @@ class MyColors {
   Color get textBottomUnselect => Get.isDarkMode ? const Color(0xFF85879A) : const Color(0xFFB7BACE);
 
   // 按钮禁用的背景颜色
-  Color get buttonDisable => Get.isDarkMode ? const Color(0xFF434345) : const Color(0xFFD1D1D1);
+  Color get buttonDisable => Get.isDarkMode ? const Color(0xFF4F4F53) : const Color(0xFFD1D1D1);
   // 按钮禁用状态下的文字颜色
   Color get onButtonDisable => Get.isDarkMode ? const Color(0xFFA8A8A8) : const Color(0xFFFFFFFF);
   // 按钮按下时的背景颜色
@@ -72,4 +73,7 @@ class MyColors {
   Color get dialogBackground => Get.isDarkMode ? const Color(0xFFF5F8FC) : const Color(0xFF333334);
   // 弹窗文字颜色
   Color get onDialogBackground => Get.isDarkMode ? const Color(0xFF333334) : const Color(0xFFF5F8FC);
+
+  // 底部导航栏的背景颜色
+  Color get bottomNavigationBackground => Get.isDarkMode ? const Color(0xFF3C3C40) : const Color(0xFFFFFFFF);
 }

@@ -164,7 +164,7 @@ class LoginView extends GetView<LoginController> {
       ]),
     );
 
-    return MyCard.login(context, Column(children: [
+    return MyCard.login(context: context, child: Column(children: [
       if (controller.state.signState.value != SignState.forgotPassword)
         _buildTitle(context),
       if (controller.state.signState.value == SignState.loginForPassword)

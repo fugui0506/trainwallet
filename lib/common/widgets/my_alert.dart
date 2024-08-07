@@ -6,11 +6,8 @@ import 'package:get/get.dart';
 class MyAlert {
   static void snackbar(String message) {
     if (Get.isSnackbarOpen) return;
-    final messageBox = Center(child: MyCard.snackbar(
-      Text(message, style: Get.theme.myStyles.onSnackbar, textAlign: TextAlign.center),
-    ));
     Get.rawSnackbar(
-      messageText: messageBox,
+      messageText: Center(child: MyCard.snackbar(message)),
       snackPosition: SnackPosition.TOP,
       borderRadius: 8,
       animationDuration: const Duration(milliseconds: 500),
@@ -22,7 +19,7 @@ class MyAlert {
   static void loading(BuildContext context) {
     if (Get.isDialogOpen != null && Get.isDialogOpen!) return;
     final loadingBox = Center(child: SizedBox(width: 20, height: 20, child: CupertinoActivityIndicator(color: Theme.of(context).myColors.onPrimary, radius: 14)));
-    final child = Center(child: MyCard.loading(context, loadingBox));
+    final child = Center(child: MyCard.loading(context: context, child: loadingBox));
     Get.dialog(child, barrierDismissible: false, useSafeArea: false);
   }
 

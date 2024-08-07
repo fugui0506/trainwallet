@@ -8,3 +8,4 @@ export 'scan/index.dart';
 export 'unknown/index.dart';
 export 'face_verified/index.dart';
 export 'webview/index.dart';
+export 'widgets/index.dart';

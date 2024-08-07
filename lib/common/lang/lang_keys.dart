@@ -60,4 +60,9 @@ abstract class Lang {
   static const homeViewQuickBuyButton= 'home_view_quick_buy_button';
   static const homeViewQuickBuyTitle= 'home_view_quick_buy_title';
   static const homeViewQuickBuyContent= 'home_view_quick_buy_content';
+
+  static const faqTitle= 'faq_title';
+  static const faqNormal= 'faq_normal';
+  static const faqHot= 'faq_Hot';
+
 }

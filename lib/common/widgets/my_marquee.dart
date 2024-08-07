@@ -20,9 +20,14 @@ class _MyMarqueeState extends State<MyMarquee> {
     super.dispose();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
   void init() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (scrollController.hasClients) {
+      if (scrollController.hasClients && mounted) {
         final maxScrollExtent = scrollController.position.maxScrollExtent;
         final duration = Duration(seconds: ((maxScrollExtent * 4) / 360).round()); // Adjust duration based on speed
 
@@ -31,10 +36,12 @@ class _MyMarqueeState extends State<MyMarquee> {
           duration: duration,
           curve: Curves.linear,
         ).then((_) {
-          scrollController.jumpTo(0.0);
-          setState(() {
-            index = (index + 1) % widget.contentList.length;
-          });
+          if (scrollController.hasClients && mounted) {
+            scrollController.jumpTo(0.0);
+            setState(() {
+              index = (index + 1) % widget.contentList.length;
+            });
+          }
         });
       }
     });

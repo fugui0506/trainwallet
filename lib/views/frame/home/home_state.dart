@@ -1,5 +1,4 @@
 import 'package:cgwallet/common/common.dart';
-import 'package:cgwallet/common/models/carousel_model.dart';
 import 'package:get/get.dart';
 
 class HomeState {
@@ -9,4 +8,10 @@ class HomeState {
 
   final marqueeList = MarqueeListModel.empty().obs;
   final carouselList = CarouselListModel.empty().obs;
+  final faqList = FaqListModel.empty().obs;
+
+
+  final _carouselIndex = 0.obs;
+  int get carouselIndex => _carouselIndex.value;
+  set carouselIndex(int value) => _carouselIndex.value = value;
 }

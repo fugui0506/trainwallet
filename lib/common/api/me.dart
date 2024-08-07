@@ -7,4 +7,6 @@ class _Me {
   final String getMarquee = '/me/marquee';
   // 获取Carousels
   final String getCarousel = '/me/getCarousel';
+  // 获取常见问题列表
+  final String getFaq = '/me/getFaq';
 }

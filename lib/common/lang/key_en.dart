@@ -60,4 +60,8 @@ const Map<String, String> en = {
   Lang.homeViewQuickBuyButton: 'Qucik buy GO',
   Lang.homeViewQuickBuyTitle: 'Transactions using CGpay are not affected by bank risk control',
   Lang.homeViewQuickBuyContent: 'CGpay anchors RMB 1:1 exchange',
+
+  Lang.faqTitle: 'FAQ',
+  Lang.faqNormal: 'Normal',
+  Lang.faqHot: 'HOT',
 };

@@ -20,6 +20,7 @@ class HomeController extends GetxController {
     await getUnReadCount();
     await getMarqueeList();
     await getCarouselList();
+    await getFaqList();
   }
 
   void copyUserId() {
@@ -31,6 +32,30 @@ class HomeController extends GetxController {
   }
 
   void goUserInfoView() {
+    
+  }
+
+  void goBuyCoinView() {
+    
+  }
+
+  void goSellCoinView() {
+    
+  }
+
+  void goTransferView() {
+    
+  }
+
+  void goBuyOrdersView() {
+    
+  }
+
+  void goSellOrdersView() {
+    
+  }
+
+  void goT() {
     
   }
 
@@ -54,5 +79,14 @@ class HomeController extends GetxController {
   Future<void> getCarouselList() async {
     await state.carouselList.value.update();
     state.carouselList.update((val) {});
+  }
+
+  Future<void> getFaqList() async {
+    await state.faqList.value.update();
+    state.faqList.update((val) {});
+  }
+
+  void carouselOnChanged(int index) {
+    state.carouselIndex = index;
   }
 }

@@ -40,7 +40,7 @@ const Map<String, String> zh = {
   Lang.loginViewCheckError: '账号无法完成人脸识别,请联系客服',
 
   // 底部导航栏
-  Lang.bottomChat: '会话',
+  Lang.bottomChat: '客服',
   Lang.bottomFlashExchange: '闪兑',
   Lang.bottomHome: '首页',
   Lang.bottomMine: '我的',
@@ -60,4 +60,8 @@ const Map<String, String> zh = {
   Lang.homeViewQuickBuyButton: '快捷买币 GO',
   Lang.homeViewQuickBuyTitle: '用CGpay交易不受银行风控影响',
   Lang.homeViewQuickBuyContent: 'CGpay锚定人民币 1:1 兑换',
+
+  Lang.faqTitle: '常见问题',
+  Lang.faqNormal: '常见',
+  Lang.faqHot: 'HOT',
 };
